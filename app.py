@@ -2,6 +2,14 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+PASSWORD = "signos2026"
+
+password = st.text_input("Contraseña", type="password")
+
+if password != PASSWORD:
+    st.warning("Acceso restringido")
+    st.stop()
+
 # ------------------ CONFIG
 st.set_page_config(
     page_title="Dashboard Signos",
