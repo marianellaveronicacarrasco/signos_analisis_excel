@@ -75,17 +75,70 @@ df_contabilidad = pd.read_csv("data_contabilidad.csv", sep=";")
 df_general["FECHA"] = pd.to_datetime(df_general["FECHA"])
 df_papeles["FECHA"] = pd.to_datetime(df_papeles["FECHA"])
 
-df_contabilidad["MONTO"] = (
-    df_contabilidad["MONTO"]
-    .astype(str)
-    .str.replace(".", "", regex=False)
-    .str.replace(",", ".", regex=False)
+df_contabilidad["MONTO"] = df_contabilidad["MONTO"].astype(str)
+
+# 🔥 Solo limpiar si tiene coma (formato europeo)
+df_contabilidad["MONTO"] = df_contabilidad["MONTO"].apply(
+    lambda x: x.replace(".", "").replace(",", ".") if "," in x else x
 )
 
-df_contabilidad["MONTO"] = pd.to_numeric(df_contabilidad["MONTO"], errors="coerce").fillna(0)
+df_contabilidad["MONTO"] = pd.to_numeric(
+    df_contabilidad["MONTO"],
+    errors="coerce"
+).fillna(0)
 df_contabilidad["TIPO"] = df_contabilidad["TIPO"].str.upper().str.strip()
 df_contabilidad["FECHA"] = pd.to_datetime(df_contabilidad["FECHA"], errors="coerce")
 df_contabilidad = df_contabilidad.dropna(subset=["FECHA"])
+
+# ------------------ FILTRO GLOBAL DE FECHAS
+
+fecha_min = min(
+    df_general["FECHA"].min(),
+    df_papeles["FECHA"].min(),
+    df_contabilidad["FECHA"].min()
+)
+
+fecha_max = max(
+    df_general["FECHA"].max(),
+    df_papeles["FECHA"].max(),
+    df_contabilidad["FECHA"].max()
+)
+
+st.markdown("### Filtrar período de análisis")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    fecha_inicio = st.date_input(
+        "Fecha desde",
+        value=fecha_min,
+        min_value=fecha_min,
+        max_value=fecha_max
+    )
+
+with col2:
+    fecha_fin = st.date_input(
+        "Fecha hasta",
+        value=fecha_max,
+        min_value=fecha_min,
+        max_value=fecha_max
+    )
+
+# Aplicar filtros
+df_general = df_general[
+    (df_general["FECHA"] >= pd.to_datetime(fecha_inicio)) &
+    (df_general["FECHA"] <= pd.to_datetime(fecha_fin))
+]
+
+df_papeles = df_papeles[
+    (df_papeles["FECHA"] >= pd.to_datetime(fecha_inicio)) &
+    (df_papeles["FECHA"] <= pd.to_datetime(fecha_fin))
+]
+
+df_contabilidad = df_contabilidad[
+    (df_contabilidad["FECHA"] >= pd.to_datetime(fecha_inicio)) &
+    (df_contabilidad["FECHA"] <= pd.to_datetime(fecha_fin))
+]
 
 # ------------------ TABS
 tab1, tab2, tab3, tab4 = st.tabs(["General", "Estudios", "Economía", "Contabilidad"])
@@ -173,6 +226,15 @@ with tab2:
 
     valores = valores[~valores.isin(["", "no aplica", "nan"])]
 
+    # Limpiar vacíos
+    valores = valores[~valores.isin(["", "no aplica", "nan"])]
+
+    # 🔥 Si es médico, excluir revalidaciones
+    if estudio == "MEDICO":
+        valores = valores[
+            ~valores.str.contains("revalid", na=False)
+        ]
+
     conteo = valores.value_counts().reset_index()
     conteo.columns = ["Tipo", "Cantidad"]
 
@@ -181,6 +243,65 @@ with tab2:
         x="Tipo",
         y="Cantidad",
         color_discrete_sequence=[COLOR_PRINCIPAL]
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+    # ---------------- REVALIDACIONES LICENCIAS COMUNES
+    st.markdown("<hr>", unsafe_allow_html=True)
+    st.subheader("Licencias comunes vs Revalidaciones")
+
+    # Normalizar
+    medico_valores = (
+        df_general["MEDICO"]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+        .str.lower()
+    )
+
+    # Licencias comunes nuevas
+    licencias_comunes = medico_valores[
+        medico_valores.str.contains("comun")
+        & ~medico_valores.str.contains("revalid")
+    ].count()
+
+    # Revalidaciones comunes
+    revalidaciones_comunes = medico_valores[
+        medico_valores.str.contains("revalid")
+        & medico_valores.str.contains("comun")
+    ].count()
+
+    # Si "comun" no aparece en revalidaciones, probar solo revalid
+    if revalidaciones_comunes == 0:
+        revalidaciones_comunes = medico_valores[
+            medico_valores.str.contains("revalid")
+        ].count()
+
+    # Dataframe
+    medico_df = pd.DataFrame({
+        "Tipo": ["Licencias comunes", "Revalidaciones"],
+        "Cantidad": [licencias_comunes, revalidaciones_comunes]
+    })
+
+    medico_df = medico_df[medico_df["Cantidad"] > 0]
+
+    fig = px.pie(
+        medico_df,
+        names="Tipo",
+        values="Cantidad",
+        color_discrete_sequence=[
+            COLOR_PRINCIPAL,
+            COLOR_SECUNDARIO
+        ]
+    )
+
+    fig.update_traces(
+        textinfo="percent+label"
+    )
+
+    fig.update_layout(
+        paper_bgcolor="white"
     )
 
     st.plotly_chart(fig, use_container_width=True)
@@ -295,10 +416,23 @@ with tab3:
 
 # ================== TAB 4 ==================
 with tab4:
-    st.subheader("Resumen contable")
+    # 🔥 Excluir faltantes y sobrantes
+    df_conta_filtrado = df_contabilidad[
+        ~df_contabilidad["CONCEPTO"]
+        .astype(str)
+        .str.upper()
+        .str.strip()
+        .isin(["FALTANTE", "SOBRANTE"])
+    ]
 
-    ingresos = df_contabilidad[df_contabilidad["TIPO"] == "INGRESO"]["MONTO"].sum()
-    gastos = df_contabilidad[df_contabilidad["TIPO"] == "GASTO"]["MONTO"].sum()
+    ingresos = df_conta_filtrado[
+        df_conta_filtrado["TIPO"] == "INGRESO"
+    ]["MONTO"].sum()
+
+    gastos = df_conta_filtrado[
+        df_conta_filtrado["TIPO"] == "GASTO"
+    ]["MONTO"].sum()
+
     balance = ingresos - gastos
 
     col1, col2, col3 = st.columns(3)
@@ -309,6 +443,29 @@ with tab4:
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
+        # ---------------- GASTO PROMEDIO POR PERSONA
+    st.subheader("Gasto promedio por persona atendida")
+
+    # Total personas atendidas
+    total_personas = len(df_general) + len(df_papeles)
+
+    # Evitar división por cero
+    gasto_por_persona = gastos / total_personas if total_personas > 0 else 0
+
+    # Métrica principal
+    col1, col2 = st.columns(2)
+
+    col1.metric(
+       "Costo promedio por persona",
+      f"${gasto_por_persona:,.2f}"
+    )
+
+    col2.metric(
+        "Total personas atendidas",
+        f"{total_personas:,}"
+    )
+
+    st.markdown("<hr>", unsafe_allow_html=True)
     # TORTA
     st.subheader("Ingresos vs Gastos")
 
@@ -346,6 +503,7 @@ with tab4:
     st.markdown("<hr>", unsafe_allow_html=True)
 
     # EVOLUCION
-    st.subheader("Evolución mensual") 
+    st.subheader("Evolución") 
     evolucion = ( df_contabilidad .groupby(["FECHA", "TIPO"])["MONTO"] .sum() .unstack(fill_value=0) ) 
     st.line_chart(evolucion, color=["#5FA8A8", "#1F3C3D"])
+

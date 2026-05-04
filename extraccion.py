@@ -27,8 +27,8 @@ df_contabilidad = pd.DataFrame(
 sheet_general = spreadsheet.worksheet("GENERAL")
 sheet_papeles = spreadsheet.worksheet("PAPELES")
 
-data_general = sheet_general.get_all_records()
-data_papeles = sheet_papeles.get_all_records()
+data_general = sheet_general.get_all_records(expected_headers=sheet_general.row_values(1))
+data_papeles = sheet_papeles.get_all_records(expected_headers=sheet_papeles.row_values(1))
 
 df_general = pd.DataFrame(data_general)
 df_papeles = pd.DataFrame(data_papeles)
