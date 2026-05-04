@@ -2,7 +2,7 @@ name: Actualizar datos Signos
 
 on:
   schedule:
-    - cron: '0 3 * * *'   # Todos los días 03:00 UTC
+    - cron: '0 3 * * *'
   workflow_dispatch:
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Instalar dependencias
         run: |
-          pip install pandas openpyxl gspread google-auth
+          pip install pandas openpyxl gspread google-auth google-auth-oauthlib
 
       - name: Ejecutar extracción
         env:
