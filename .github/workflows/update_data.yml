@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Verificar secret
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: echo "Secret cargado correctamente"
+      
       - name: Clonar repositorio
         uses: actions/checkout@v4
 
