@@ -23,6 +23,8 @@ jobs:
           pip install pandas openpyxl gspread google-auth
 
       - name: Ejecutar extracción
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: python extraccion.py
 
       - name: Commit y push CSV actualizados
