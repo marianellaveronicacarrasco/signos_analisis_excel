@@ -221,6 +221,10 @@ with tab1:
     ]
 
     recep = df_filtrado.groupby(["RECEPCIONISTA", "TIPO_ATENCION"]).size().unstack(fill_value=0)
+    # Asegurar columnas
+    for col in ["ONLINE", "PAPELES"]:
+        if col not in recep.columns:
+            recep[col] = 0
     recep = recep.reset_index()
 
     fig = px.bar(
