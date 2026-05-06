@@ -1,507 +1,236 @@
+import gspread
+from google.oauth2.service_account import Credentials
 import pandas as pd
+import unicodedata
 
-# ------------------ CONFIG
-st.set_page_config(
-    page_title="Dashboard Signos",
-    layout="wide"
+scope = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+
+creds = Credentials.from_service_account_file(
+    "norse-lens-493218-f1-49efa0ee2185.json", scopes=scope
 )
 
-# ------------------ COLORES MARCA
-COLOR_PRINCIPAL = "#5FA8A8"
-COLOR_SECUNDARIO = "#A8D5D5"
-COLOR_OSCURO = "#1F3C3D"
+client = gspread.authorize(creds)
 
-# ------------------ ESTILOS
-st.markdown(f"""
-<style>
-.stApp {{
-    background-color: #F7FAFA;
-}}
+spreadsheet = client.open_by_key("1s3PvG-ob2P-KsgrdO4IyFxC8kVICHWNgiwOTiyF2BRQ")
 
-h1, h2, h3 {{
-    color: {COLOR_OSCURO};
-}}
+spreadsheet_conta = client.open_by_key("1owTaWpPgb3LHMhgctAgDPCxheounko_FVeFArTN4T3o")
 
-.stTabs [role="tab"] {{
-    background-color: #E8F3F3;
-    border-radius: 10px;
-    padding: 10px;
-}}
+sheet_contabilidad = spreadsheet_conta.worksheet("INGRESOS Y GASTOS")
+data_contabilidad = sheet_contabilidad.get_all_values()
 
-.stTabs [aria-selected="true"] {{
-    background-color: {COLOR_PRINCIPAL};
-    color: white;
-}}
-
-[data-testid="metric-container"] {{
-    background-color: white;
-    border-radius: 15px;
-    padding: 20px;
-    border: 1px solid #E0EEEE;
-    box-shadow: 0px 2px 6px rgba(0,0,0,0.05);
-}}
-</style>
-""", unsafe_allow_html=True)
-
-# ------------------ HEADER PRO
-import base64
-
-def get_base64_image(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
-
-logo_base64 = get_base64_image("logo_blanco.png")
-
-st.markdown(f"""
-<div style='background: linear-gradient(90deg, {COLOR_PRINCIPAL}, {COLOR_SECUNDARIO}); padding: 35px; border-radius: 20px; text-align: center; margin-bottom: 30px;'>
-
-<img src="data:image/png;base64,{logo_base64}" width="240"/>
-
-<p style="color:white; font-size:20px; margin-top:10px; font-weight:300; letter-spacing:1px;">
-Panel de análisis y gestión
-</p>
-
-</div>
-""", unsafe_allow_html=True)
-
-# ------------------ CARGA
-df_general = pd.read_csv("data_general.csv", sep=";")
-df_papeles = pd.read_csv("data_papeles.csv", sep=";")
-df_contabilidad = pd.read_csv("data_contabilidad.csv", sep=";")
-
-# ------------------ PREPARACION
-df_general["FECHA"] = pd.to_datetime(df_general["FECHA"])
-df_papeles["FECHA"] = pd.to_datetime(df_papeles["FECHA"])
-
-df_contabilidad["MONTO"] = df_contabilidad["MONTO"].astype(str)
-
-# 🔥 Solo limpiar si tiene coma (formato europeo)
-df_contabilidad["MONTO"] = df_contabilidad["MONTO"].apply(
-    lambda x: x.replace(".", "").replace(",", ".") if "," in x else x
+df_contabilidad = pd.DataFrame(
+    data_contabilidad[2:],   # datos
+    columns=data_contabilidad[2]  # headers reales
 )
 
-df_contabilidad["MONTO"] = pd.to_numeric(
-    df_contabilidad["MONTO"],
-    errors="coerce"
-).fillna(0)
-df_contabilidad["TIPO"] = df_contabilidad["TIPO"].str.upper().str.strip()
-df_contabilidad["FECHA"] = pd.to_datetime(df_contabilidad["FECHA"], errors="coerce")
-df_contabilidad = df_contabilidad.dropna(subset=["FECHA"])
+sheet_general = spreadsheet.worksheet("GENERAL")
+sheet_papeles = spreadsheet.worksheet("PAPELES")
 
-# ------------------ FILTRO GLOBAL DE FECHAS
+data_general = sheet_general.get_all_records(expected_headers=sheet_general.row_values(1))
+data_papeles = sheet_papeles.get_all_records(expected_headers=sheet_papeles.row_values(1))
 
-fecha_min = min(
-    df_general["FECHA"].min(),
-    df_papeles["FECHA"].min(),
-    df_contabilidad["FECHA"].min()
-)
+df_general = pd.DataFrame(data_general)
+df_papeles = pd.DataFrame(data_papeles)
 
-fecha_max = max(
-    df_general["FECHA"].max(),
-    df_papeles["FECHA"].max(),
-    df_contabilidad["FECHA"].max()
-)
+# ---------------- NORMALIZAR PAPELES (CLAVE)
+df_papeles.columns = df_papeles.columns.str.strip()
 
-st.markdown("### Filtrar período de análisis")
+df_papeles = df_papeles.rename(columns={
+    "EFECTIVO": "MONTO EN EFECTIVO",
+    "DEBITO": "MONTO EN MERCADOPAGO"
+})
 
-col1, col2 = st.columns(2)
+if "MONTO EN SANTANDER" not in df_papeles.columns:
+    df_papeles["MONTO EN SANTANDER"] = "0"
 
-with col1:
-    fecha_inicio = st.date_input(
-        "Fecha desde",
-        value=fecha_min,
-        min_value=fecha_min,
-        max_value=fecha_max
-    )
+# ---------------- FUNCIONES
 
-with col2:
-    fecha_fin = st.date_input(
-        "Fecha hasta",
-        value=fecha_max,
-        min_value=fecha_min,
-        max_value=fecha_max
-    )
-
-# Aplicar filtros
-df_general = df_general[
-    (df_general["FECHA"] >= pd.to_datetime(fecha_inicio)) &
-    (df_general["FECHA"] <= pd.to_datetime(fecha_fin))
-]
-
-df_papeles = df_papeles[
-    (df_papeles["FECHA"] >= pd.to_datetime(fecha_inicio)) &
-    (df_papeles["FECHA"] <= pd.to_datetime(fecha_fin))
-]
-
-df_contabilidad = df_contabilidad[
-    (df_contabilidad["FECHA"] >= pd.to_datetime(fecha_inicio)) &
-    (df_contabilidad["FECHA"] <= pd.to_datetime(fecha_fin))
-]
-
-# ------------------ TABS
-tab1, tab2, tab3, tab4 = st.tabs(["General", "Estudios", "Economía", "Contabilidad"])
-
-# ================== TAB 1 ==================
-with tab1: 
-    st.subheader("Movimiento de personas por día")
-    df_general["FECHA"] = pd.to_datetime(df_general["FECHA"])
-    personas_dia = df_general.groupby(df_general["FECHA"].dt.strftime("%Y-%m-%d")).size() 
-    st.line_chart(personas_dia, color="#5FA8A8")
-
-    # ---------------- TORTA
-    st.subheader("Distribución por tipo de trámite")
-
-    tramites = df_general["TIPO_DE_TRAMITE"].value_counts()
-
-    fig = px.pie(
-        values=tramites.values,
-        names=tramites.index,
-        color_discrete_sequence=[
-            COLOR_PRINCIPAL,
-            COLOR_SECUNDARIO,
-            "#9476DB",
-            "#EB6E9E",
-            "#EBB56E",
-            "#E3EB6E"]
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
-
-    st.markdown("<hr>", unsafe_allow_html=True)
-
-    # ---------------- RECEPCIONISTA
-    st.subheader("Atención por recepcionista")
-
-    df_general["ONLINE"] = (
-        df_general["ONLINE"]
-        .fillna("")
-        .astype(str)
+def limpiar_monto(col):
+    return (
+        col.astype(str)
+        .str.replace("$", "", regex=False)
+        .str.replace(".", "", regex=False)
+        .str.replace(",", ".", regex=False)
         .str.strip()
+        .replace("", "0")
+        .pipe(pd.to_numeric, errors="coerce")
+        .fillna(0)
     )
 
-    df_general["TIPO_ATENCION"] = df_general["ONLINE"].str.lower().apply(
-        lambda x: "ONLINE" if "online" in x else "PAPELES"
+def limpiar_texto(texto):
+    return (
+        unicodedata.normalize("NFKD", texto)
+        .encode("ascii", "ignore")
+        .decode("utf-8")
     )
 
-    recep = df_general.groupby(["RECEPCIONISTA", "TIPO_ATENCION"]).size().unstack(fill_value=0)
-    recep = recep.reset_index()
+def arreglar_acentos(texto):
+    try:
+        return texto.encode('latin1').decode('utf-8')
+    except:
+        return texto
 
-    fig = px.bar(
-        recep,
-        x="RECEPCIONISTA",
-        y=["ONLINE", "PAPELES"],
-        barmode="stack",
-        color_discrete_sequence=[COLOR_PRINCIPAL, COLOR_SECUNDARIO]
-    )
+def limpiar_datos(df):
+    # Columnas prolijas
+    df.columns = df.columns.str.strip().str.upper().str.replace(" ", "_")
 
-    st.plotly_chart(fig, use_container_width=True)
+    # Eliminar filas vacías
+    df = df.dropna(how="all")
 
-# ================== TAB 2 ==================
-with tab2:
-    st.subheader("Estudios realizados")
+    # Limpiar strings
+    df = df.apply(lambda x: x.str.strip() if x.dtype == "object" else x)
 
-    estudio = st.selectbox(
-        "Tipo de estudio",
-        [
-            "ECG",
-            "EEG",
-            "AUDIOMETRIA",
-            "PSICOLOGICO",
-            "TEST_PSICOLOGICO",
-            "ESPIROMETRIA",
-            "ERGOMETRIA",
-            "MEDICO"
-        ]
-    )
+    # Limpiar montos SOLO si existen
+    if "MONTO_EN_EFECTIVO" in df.columns:
+        df["MONTO_EN_EFECTIVO"] = limpiar_monto(df["MONTO_EN_EFECTIVO"])
 
-    valores = (
-        df_general[estudio]
-        .fillna("")
-        .astype(str)
-        .str.strip()
-        .str.lower()
-    )
+    if "MONTO_EN_MERCADOPAGO" in df.columns:
+        df["MONTO_EN_MERCADOPAGO"] = limpiar_monto(df["MONTO_EN_MERCADOPAGO"])
 
-    valores = valores[~valores.isin(["", "no aplica", "nan"])]
+    if "MONTO_EN_SANTANDER" in df.columns:
+        df["MONTO_EN_SANTANDER"] = limpiar_monto(df["MONTO_EN_SANTANDER"])
 
-    # Limpiar vacíos
-    valores = valores[~valores.isin(["", "no aplica", "nan"])]
+    # Filtrar nombres vacíos
+    if "NOMBRE" in df.columns:
+        df = df[df["NOMBRE"].notna()]
+        df = df[df["NOMBRE"].str.strip() != ""]
+        df["NOMBRE"] = df["NOMBRE"].str.title()
 
-    # 🔥 Si es médico, excluir revalidaciones
-    if estudio == "MEDICO":
-        valores = valores[
-            ~valores.str.contains("revalid", na=False)
-        ]
+    # Fecha
+    if "FECHA" in df.columns:
+        df["FECHA"] = pd.to_datetime(df["FECHA"], dayfirst=True, errors="coerce")
 
-    conteo = valores.value_counts().reset_index()
-    conteo.columns = ["Tipo", "Cantidad"]
+    # Arreglar acentos
+    df = df.map(lambda x: arreglar_acentos(x) if isinstance(x, str) else x)
 
-    fig = px.bar(
-        conteo,
-        x="Tipo",
-        y="Cantidad",
-        color_discrete_sequence=[COLOR_PRINCIPAL]
-    )
+    # Limpiar nombres de columnas
+    df.columns = [limpiar_texto(col) for col in df.columns]
+    df.columns = df.columns.str.upper().str.strip().str.replace(" ", "_")
 
-    st.plotly_chart(fig, use_container_width=True)
+    # Eliminar columnas vacías
+    df = df.loc[:, df.columns != ""]
+    df = df.drop_duplicates()
 
-    # ---------------- REVALIDACIONES LICENCIAS COMUNES
-    st.markdown("<hr>", unsafe_allow_html=True)
-    st.subheader("Licencias comunes vs Revalidaciones")
+    return df
+def limpiar_contabilidad(df):
+    df.columns = df.columns.str.strip().str.upper().str.replace(" ", "_")
 
-    # Normalizar
-    medico_valores = (
-        df_general["MEDICO"]
-        .fillna("")
-        .astype(str)
-        .str.strip()
-        .str.lower()
-    )
+    df = df.dropna(how="all")
 
-    # Licencias comunes nuevas
-    licencias_comunes = medico_valores[
-        medico_valores.str.contains("comun")
-        & ~medico_valores.str.contains("revalid")
-    ].count()
+    df["FECHA"] = df["FECHA"].astype(str).str.strip()
+    df["FECHA"] = pd.to_datetime(df["FECHA"], format="%Y-%m", errors="coerce")
 
-    # Revalidaciones comunes
-    revalidaciones_comunes = medico_valores[
-        medico_valores.str.contains("revalid")
-        & medico_valores.str.contains("comun")
-    ].count()
+    df["TIPO"] = df["TIPO"].str.strip().str.upper()
+    df["CONCEPTO"] = df["CONCEPTO"].str.strip()
 
-    # Si "comun" no aparece en revalidaciones, probar solo revalid
-    if revalidaciones_comunes == 0:
-        revalidaciones_comunes = medico_valores[
-            medico_valores.str.contains("revalid")
-        ].count()
+    df["MONTO"] = limpiar_monto(df["MONTO"])
 
-    # Dataframe
-    medico_df = pd.DataFrame({
-        "Tipo": ["Licencias comunes", "Revalidaciones"],
-        "Cantidad": [licencias_comunes, revalidaciones_comunes]
-    })
+    return df
+# ---------------- LIMPIEZA
 
-    medico_df = medico_df[medico_df["Cantidad"] > 0]
+df_general.columns = df_general.columns.str.strip()
+df_general = limpiar_datos(df_general)
 
-    fig = px.pie(
-        medico_df,
-        names="Tipo",
-        values="Cantidad",
-        color_discrete_sequence=[
-            COLOR_PRINCIPAL,
-            COLOR_SECUNDARIO
-        ]
-    )
+df_papeles = limpiar_datos(df_papeles)
+df_contabilidad = limpiar_contabilidad(df_contabilidad)
 
-    fig.update_traces(
-        textinfo="percent+label"
-    )
+# ---------------- VALIDACION
 
-    fig.update_layout(
-        paper_bgcolor="white"
-    )
+print(df_general.isnull().sum())
+print(df_papeles.isnull().sum())
 
-    st.plotly_chart(fig, use_container_width=True)
+# ---------------- EXPORTAR
 
-# ================== TAB 3 ==================
-with tab3: 
-    import plotly.express as px
+df_general.to_csv("data_general.csv", index=False, sep=";", encoding="utf-8-sig")
+df_papeles.to_csv("data_papeles.csv", index=False, sep=";", encoding="utf-8-sig")
+df_contabilidad.to_csv("data_contabilidad.csv", index=False, sep=";", encoding="utf-8-sig")
 
-    conteo_general = pd.Series({
-        "EFECTIVO": (df_general["MONTO_EN_EFECTIVO"] > 0).sum(),
-        "MERCADOPAGO": (df_general["MONTO_EN_MERCADOPAGO"] > 0).sum(),
-        "SANTANDER": (df_general["MONTO_EN_SANTANDER"] > 0).sum()
-    })
+# ---------------- CALCULOS
 
-    conteo_papeles = pd.Series({
-        "EFECTIVO": (df_papeles["MONTO_EN_EFECTIVO"] > 0).sum(),
-        "MERCADOPAGO": (df_papeles["MONTO_EN_MERCADOPAGO"] > 0).sum(),
-        "SANTANDER": (df_papeles["MONTO_EN_SANTANDER"] > 0).sum()
-    })
+# TOTAL
+df_general["TOTAL_MONTO"] = (
+    df_general["MONTO_EN_EFECTIVO"] +
+    df_general["MONTO_EN_MERCADOPAGO"] +
+    df_general["MONTO_EN_SANTANDER"]
+)
 
-    metodos_df = conteo_general.add(conteo_papeles, fill_value=0).reset_index()
-    metodos_df.columns = ["Metodo", "Cantidad"]
+df_papeles["TOTAL_MONTO"] = (
+    df_papeles["MONTO_EN_EFECTIVO"] +
+    df_papeles["MONTO_EN_MERCADOPAGO"] +
+    df_papeles["MONTO_EN_SANTANDER"]
+)
 
-    # opcional: limpiar métodos en 0
-    metodos_df = metodos_df[metodos_df["Cantidad"] > 0]
+# INGRESOS POR FECHA
+ingresos_fecha_general = df_general.groupby("FECHA")["TOTAL_MONTO"].sum().reset_index()
+ingresos_fecha_papeles = df_papeles.groupby("FECHA")["TOTAL_MONTO"].sum().reset_index()
 
-    st.subheader("Métodos de pago (distribución)")
+# METODOS
+metodos_general = df_general[[
+    "MONTO_EN_EFECTIVO",
+    "MONTO_EN_MERCADOPAGO",
+    "MONTO_EN_SANTANDER"
+]].sum()
 
-    fig = px.pie(
-        metodos_df,
-        names="Metodo",
-        values="Cantidad",
-        color_discrete_sequence=[
-            COLOR_PRINCIPAL,
-            COLOR_SECUNDARIO,
-            COLOR_OSCURO
-        ]
-    )
+metodos_papeles = df_papeles[[
+    "MONTO_EN_EFECTIVO",
+    "MONTO_EN_MERCADOPAGO",
+    "MONTO_EN_SANTANDER"
+]].sum()
 
-    fig.update_traces(
-        textinfo="percent+label"
-    )
+# EXTRA
+ecg = df_general["ECG"].value_counts() if "ECG" in df_general.columns else None
 
-    fig.update_layout(
-        paper_bgcolor="white"
-    )
 
-    st.plotly_chart(fig, use_container_width=True)
+#------------------------------
 
 # INGRESOS EN EL TIEMPO
-    def preparar_datos(df):
+def preparar_datos(df):
 
-        df["TOTAL_MONTO"] = (
-            df["MONTO_EN_EFECTIVO"] +
-            df["MONTO_EN_MERCADOPAGO"] +
-            df["MONTO_EN_SANTANDER"]
-        )
-        metodos = df[[
-            "MONTO_EN_EFECTIVO",
-            "MONTO_EN_MERCADOPAGO",
-            "MONTO_EN_SANTANDER"
-        ]].sum()
-        ingresos_fecha = df.groupby("FECHA")["TOTAL_MONTO"].sum().reset_index()
+    df["TOTAL_MONTO"] = (
+        df["MONTO_EN_EFECTIVO"] +
+        df["MONTO_EN_MERCADOPAGO"] +
+        df["MONTO_EN_SANTANDER"]
+    )
+    metodos = df[[
+        "MONTO_EN_EFECTIVO",
+        "MONTO_EN_MERCADOPAGO",
+        "MONTO_EN_SANTANDER"
+    ]].sum()
+    ingresos_fecha = df.groupby("FECHA")["TOTAL_MONTO"].sum().reset_index()
         
-        return df, metodos, ingresos_fecha
+    return df, metodos, ingresos_fecha
     
-   
-    
-    df_general, metodos_general, ingresos_general = preparar_datos(df_general)
-    df_papeles, metodos_papeles, ingresos_papeles = preparar_datos(df_papeles)
+df_general, metodos_general, ingresos_general = preparar_datos(df_general)
+df_papeles, metodos_papeles, ingresos_papeles = preparar_datos(df_papeles)
 
-
-    
     # RENOMBRAR PARA GRAFICO 
-    ingresos_general = ingresos_general.rename(columns={"TOTAL_MONTO": "GENERAL"})
-    ingresos_papeles = ingresos_papeles.rename(columns={"TOTAL_MONTO": "PAPELES"})
-    
-     # ❌ eliminar fechas basura
-    ingresos_general = ingresos_general[
-        ingresos_general["FECHA"] > "2000-01-01"
-    ]
-
-# ❌ eliminar días con 0 (opcional pero recomendable)
-    ingresos_general = ingresos_general[
-        ingresos_general["GENERAL"] > 0
-    ]
-
-    ingresos_papeles = ingresos_papeles[
-       ingresos_papeles["PAPELES"] > 0
-    ]   
-    
-    
+ingresos_general = ingresos_general.rename(columns={"TOTAL_MONTO": "GENERAL"})
+ingresos_papeles = ingresos_papeles.rename(columns={"TOTAL_MONTO": "PAPELES"})
     # UNIR 
-    
-    df_lineas = pd.merge(
-        ingresos_general,
-        ingresos_papeles,
-        on="FECHA",
-        how="outer"
-    ).fillna(0) 
-    df_lineas["TOTAL"] = df_lineas["GENERAL"] + df_lineas["PAPELES"]
-    df_lineas["FECHA"] = pd.to_datetime(df_lineas["FECHA"])
+print("GENERAL:")
+print(ingresos_general.head())
+
+print("PAPELES:")
+print(ingresos_papeles.head())
+
+df_lineas = pd.merge(
+    ingresos_general,
+    ingresos_papeles,
+    on="FECHA",
+    how="outer"
+).fillna(0) 
+df_lineas["TOTAL"] = df_lineas["GENERAL"] + df_lineas["PAPELES"]
+df_lineas["FECHA"] = pd.to_datetime(df_lineas["FECHA"])
 
     # 🔥 ORDENAR
-    df_lineas = df_lineas.sort_values("FECHA")
+df_lineas = df_lineas.sort_values("FECHA")
 
-    df_lineas = df_lineas.set_index("FECHA")
+df_lineas = df_lineas.set_index("FECHA")
     
+print("ESTO LE TENES QUE MANDAR A CHAT GPT")
+print("------------------------------")
+df_lineas.head()
+df_lineas.index
 
-    st.subheader("Ingresos en el tiempo") 
-    st.line_chart(df_lineas,color=["#5FA8A8", "#1F3C3D","#9476DB"])
-
-# ================== TAB 4 ==================
-with tab4:
-    # 🔥 Excluir faltantes y sobrantes
-    df_conta_filtrado = df_contabilidad[
-        ~df_contabilidad["CONCEPTO"]
-        .astype(str)
-        .str.upper()
-        .str.strip()
-        .isin(["FALTANTE", "SOBRANTE"])
-    ]
-
-    ingresos = df_conta_filtrado[
-        df_conta_filtrado["TIPO"] == "INGRESO"
-    ]["MONTO"].sum()
-
-    gastos = df_conta_filtrado[
-        df_conta_filtrado["TIPO"] == "GASTO"
-    ]["MONTO"].sum()
-
-    balance = ingresos - gastos
-
-    col1, col2, col3 = st.columns(3)
-
-    col1.metric("Ingresos", f"${ingresos:,.0f}")
-    col2.metric("Gastos", f"${gastos:,.0f}")
-    col3.metric("Balance", f"${balance:,.0f}", delta=f"${balance:,.0f}")
-
-    st.markdown("<hr>", unsafe_allow_html=True)
-
-        # ---------------- GASTO PROMEDIO POR PERSONA
-    st.subheader("Gasto promedio por persona atendida")
-
-    # Total personas atendidas
-    total_personas = len(df_general) + len(df_papeles)
-
-    # Evitar división por cero
-    gasto_por_persona = gastos / total_personas if total_personas > 0 else 0
-
-    # Métrica principal
-    col1, col2 = st.columns(2)
-
-    col1.metric(
-       "Costo promedio por persona",
-      f"${gasto_por_persona:,.2f}"
-    )
-
-    col2.metric(
-        "Total personas atendidas",
-        f"{total_personas:,}"
-    )
-
-    st.markdown("<hr>", unsafe_allow_html=True)
-    # TORTA
-    st.subheader("Ingresos vs Gastos")
-
-    fig = px.pie(
-        values=[ingresos, gastos],
-        names=["Ingresos", "Gastos"],
-        color_discrete_sequence=[COLOR_PRINCIPAL, COLOR_SECUNDARIO]
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
-
-    st.markdown("<hr>", unsafe_allow_html=True)
-
-    # GASTOS
-    st.subheader("Gastos por categoría")
-
-    gastos_cat = (
-        df_contabilidad[df_contabilidad["TIPO"] == "GASTO"]
-        .groupby("CONCEPTO")["MONTO"]
-        .sum()
-        .sort_values(ascending=False)
-        .head(10)
-        .reset_index()
-    )
-
-    fig = px.bar(
-        gastos_cat,
-        x="CONCEPTO",
-        y="MONTO",
-        color_discrete_sequence=[COLOR_PRINCIPAL]
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
-
-    st.markdown("<hr>", unsafe_allow_html=True)
-
-    # EVOLUCION
-    st.subheader("Evolución") 
-    evolucion = ( df_contabilidad .groupby(["FECHA", "TIPO"])["MONTO"] .sum() .unstack(fill_value=0) ) 
-    st.line_chart(evolucion, color=["#5FA8A8", "#1F3C3D"])
+print("Extracción completada correctamente")
 
