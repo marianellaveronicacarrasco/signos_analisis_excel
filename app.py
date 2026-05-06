@@ -216,7 +216,7 @@ with tab1:
         lambda x: "ONLINE" if "online" in x else "PAPELES"
     )
 
-     df_filtrado = df_general[
+    df_filtrado = df_general[
     df_general["TIPO_DE_TRAMITE"].fillna("").str.lower().str.contains("licencia común", na=False)
     ]
 
