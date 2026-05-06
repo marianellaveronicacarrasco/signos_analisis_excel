@@ -162,7 +162,10 @@ df_general["TOTAL_MONTO"] = (
 df_papeles["TOTAL_MONTO"] = (
     df_papeles["MONTO_EN_EFECTIVO"] +
     df_papeles["MONTO_EN_MERCADOPAGO"] +
-    df_papeles["MONTO_EN_SANTANDER"]
+    df_papeles["MONTO_EN_SANTANDER"]-
+    df_papeles["VALOR_RNR"]-
+    df_papeles["VALOR_VOTO"]-
+    df_papeles["VALOR_REP"]
 )
 
 # INGRESOS POR FECHA
