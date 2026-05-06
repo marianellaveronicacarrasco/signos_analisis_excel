@@ -2,6 +2,37 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+def check_password():
+    def password_entered():
+        if st.session_state["password"] == st.secrets["APP_PASSWORD"]:
+            st.session_state["password_correct"] = True
+        else:
+            st.session_state["password_correct"] = False
+
+    if "password_correct" not in st.session_state:
+        st.text_input(
+            "Contraseña",
+            type="password",
+            on_change=password_entered,
+            key="password"
+        )
+        return False
+
+    elif not st.session_state["password_correct"]:
+        st.text_input(
+            "Contraseña",
+            type="password",
+            on_change=password_entered,
+            key="password"
+        )
+        st.error("Contraseña incorrecta")
+        return False
+
+    else:
+        return True
+
+if not check_password():
+    st.stop()
 # ------------------ CONFIG
 st.set_page_config(
     page_title="Dashboard Signos",
