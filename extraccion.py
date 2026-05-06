@@ -116,6 +116,11 @@ def limpiar_datos(df):
     df = df.loc[:, df.columns != ""]
     df = df.drop_duplicates()
 
+    columnas_valores = ["VALOR_REP", "VALOR_RNR", "VALOR_VOTO"]
+    for col in columnas_valores:
+        if col in df.columns:
+            df[col] = limpiar_monto(df[col])
+
     return df
 def limpiar_contabilidad(df):
     df.columns = df.columns.str.strip().str.upper().str.replace(" ", "_")
@@ -137,11 +142,7 @@ df_general.columns = df_general.columns.str.strip()
 df_general = limpiar_datos(df_general)
 
 df_papeles = limpiar_datos(df_papeles)
-columnas_valores = ["VALOR_REP", "VALOR_RNR", "VALOR_VOTO"]
 
-for col in columnas_valores:
-    if col in df.columns:
-        df[col] = limpiar_monto(df[col])
 df_contabilidad = limpiar_contabilidad(df_contabilidad)
 
 # ---------------- VALIDACION
