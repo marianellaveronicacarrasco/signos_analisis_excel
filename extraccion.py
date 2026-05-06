@@ -5,8 +5,13 @@ import unicodedata
 
 scope = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
-creds = Credentials.from_service_account_file(
-    "norse-lens-493218-f1-49efa0ee2185.json", scopes=scope
+import os
+import json
+
+creds_dict = json.loads(os.environ["GOOGLE_CREDENTIALS"])
+
+creds = Credentials.from_service_account_info(
+    creds_dict, scopes=scope
 )
 
 client = gspread.authorize(creds)
