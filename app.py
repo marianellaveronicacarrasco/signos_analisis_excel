@@ -204,7 +204,7 @@ with tab1:
 
     # ---------------- RECEPCIONISTA
     st.subheader("Atención por recepcionista")
-
+    
     df_general["ONLINE"] = (
         df_general["ONLINE"]
         .fillna("")
@@ -216,7 +216,11 @@ with tab1:
         lambda x: "ONLINE" if "online" in x else "PAPELES"
     )
 
-    recep = df_general.groupby(["RECEPCIONISTA", "TIPO_ATENCION"]).size().unstack(fill_value=0)
+     df_filtrado = df_general[
+    df_general["TIPO_DE_TRAMITE"].fillna("").str.lower().str.contains("licencia común", na=False)
+    ]
+
+    recep = df_filtrado.groupby(["RECEPCIONISTA", "TIPO_ATENCION"]).size().unstack(fill_value=0)
     recep = recep.reset_index()
 
     fig = px.bar(
