@@ -217,7 +217,7 @@ with tab1:
     )
 
     df_filtrado = df_general[
-    df_general["TIPO_DE_TRAMITE"].fillna("").str.lower().str.contains("licencia común", na=False)
+    df_general["TIPO_DE_TRAMITE"].fillna("").str.lower().str.contains("licencia comun", na=False)
     ]
 
     recep = df_filtrado.groupby(["RECEPCIONISTA", "TIPO_ATENCION"]).size().unstack(fill_value=0)
