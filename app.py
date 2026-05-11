@@ -318,39 +318,42 @@ with tab2:
     st.plotly_chart(fig, use_container_width=True)
 
     # ---------------- REVALIDACIONES LICENCIAS COMUNES
+    # ---------------- REVALIDACIONES LICENCIAS COMUNES
     st.markdown("<hr>", unsafe_allow_html=True)
     st.subheader("Licencias comunes vs Revalidaciones")
 
-    # Normalizar
+    # Filtrar solo Licencia Común
+    df_licencia_comun = df_general[
+        df_general["TIPO_DE_TRAMITE"]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+        .str.lower()
+        .str.contains("licencia común", na=False)
+    ]
+
+    # Normalizar MEDICO
     medico_valores = (
-        df_general["MEDICO"]
+        df_licencia_comun["MEDICO"]
         .fillna("")
         .astype(str)
         .str.strip()
         .str.lower()
     )
 
-    # Licencias comunes nuevas
+    # Nuevas
     licencias_comunes = medico_valores[
-        medico_valores.str.contains("licencia comun")
-        & ~medico_valores.str.contains("revalidacion")
+        ~medico_valores.str.contains("revalid")
     ].count()
 
-    # Revalidaciones comunes
+    # Revalidaciones
     revalidaciones = medico_valores[
-        medico_valores.str.contains("revalidacion")
-        & medico_valores.str.contains("licencia comun")
+        medico_valores.str.contains("revalid")
     ].count()
-
-    # Si "comun" no aparece en revalidaciones, probar solo revalid
-    if revalidaciones == 0:
-        revalidaciones= medico_valores[
-            medico_valores.str.contains("revalidacion")
-        ].count()
 
     # Dataframe
     medico_df = pd.DataFrame({
-        "Tipo": ["licencia comun", "revalidacion"],
+        "Tipo": ["Licencias nuevas", "Revalidaciones"],
         "Cantidad": [licencias_comunes, revalidaciones]
     })
 
