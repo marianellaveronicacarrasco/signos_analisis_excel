@@ -337,21 +337,21 @@ with tab2:
     ].count()
 
     # Revalidaciones comunes
-    revalidaciones_comunes = medico_valores[
+    revalidaciones = medico_valores[
         medico_valores.str.contains("revalidacion")
         & medico_valores.str.contains("licencia Comun")
     ].count()
 
     # Si "comun" no aparece en revalidaciones, probar solo revalid
-    if revalidaciones_comunes == 0:
-        revalidaciones_comunes = medico_valores[
+    if revalidaciones == 0:
+        revalidaciones= medico_valores[
             medico_valores.str.contains("revalidacion")
         ].count()
 
     # Dataframe
     medico_df = pd.DataFrame({
         "Tipo": ["licencia comun", "revalidacion"],
-        "Cantidad": [licencia_comun, revalidacion]
+        "Cantidad": [licencias_comunes, revalidaciones]
     })
 
     medico_df = medico_df[medico_df["Cantidad"] > 0]
