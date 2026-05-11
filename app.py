@@ -175,16 +175,33 @@ df_contabilidad = df_contabilidad[
 tab1, tab2, tab3, tab4 = st.tabs(["General", "Estudios", "Economía", "Contabilidad"])
 
 # ================== TAB 1 ==================
-with tab1: 
+with tab1:
+    # FILTRAR SIN REVALIDACIONES
+    df_filtrado = df_general[
+        ~df_general["MEDICO"]
+        .fillna("")
+        .astype(str)
+        .str.lower()
+        .str.contains("Revalidacion", na=False)
+    ]
+
+    # ---------------- MOVIMIENTO
     st.subheader("Movimiento de personas por día")
-    df_general["FECHA"] = pd.to_datetime(df_general["FECHA"])
-    personas_dia = df_general.groupby(df_general["FECHA"].dt.strftime("%Y-%m-%d")).size() 
+
+    df_filtrado["FECHA"] = pd.to_datetime(df_filtrado["FECHA"])
+
+    personas_dia = df_filtrado.groupby(
+        df_filtrado["FECHA"].dt.strftime("%Y-%m-%d")
+    ).size()
+
     st.line_chart(personas_dia, color="#5FA8A8")
 
     # ---------------- TORTA
     st.subheader("Distribución por tipo de trámite")
 
-    tramites = df_general["TIPO_DE_TRAMITE"].value_counts()
+    tramites = df_filtrado["TIPO_DE_TRAMITE"].value_counts()
+
+    total_tramites = tramites.sum()
 
     fig = px.pie(
         values=tramites.values,
@@ -195,7 +212,17 @@ with tab1:
             "#9476DB",
             "#EB6E9E",
             "#EBB56E",
-            "#E3EB6E"]
+            "#E3EB6E"
+        ]
+    )
+
+    fig.update_traces(
+        textinfo="percent+label+value",
+        hovertemplate="<b>%{label}</b><br>Cantidad: %{value}<br>Porcentaje: %{percent}<extra></extra>"
+    )
+
+    fig.update_layout(
+        title=f"Total de trámites: {total_tramites}"
     )
 
     st.plotly_chart(fig, use_container_width=True)
