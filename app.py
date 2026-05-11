@@ -201,6 +201,11 @@ with tab1:
 
     tramites = df_filtrado["TIPO_DE_TRAMITE"].value_counts()
 
+    labels = [
+        f"{tipo} ({cantidad})"
+        for tipo, cantidad in zip(tramites.index, tramites.values)
+    ]
+
     total_tramites = tramites.sum()
 
     fig = px.pie(
@@ -217,8 +222,7 @@ with tab1:
     )
 
     fig.update_traces(
-        textinfo="percent+label+value",
-        hovertemplate="<b>%{label}</b><br>Cantidad: %{value}<br>Porcentaje: %{percent}<extra></extra>"
+        textinfo="percent"
     )
 
     fig.update_layout(
