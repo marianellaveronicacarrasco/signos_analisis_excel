@@ -575,18 +575,32 @@ with tab4:
         .reset_index()
     )
 
-    fig = px.bar(
+    fig = px.pie(
         gastos_cat,
-        x="CONCEPTO",
-        y="MONTO",
-        color_discrete_sequence=[COLOR_PRINCIPAL]
+        names="CONCEPTO",
+        values="MONTO",
+        color_discrete_sequence=[
+            COLOR_PRINCIPAL,
+            COLOR_SECUNDARIO,
+            "#9476DB",
+            "#EB6E9E",
+            "#EBB56E",
+            "#E3EB6E"
+        ]
+    )
+
+    fig.update_traces(
+        textinfo="percent+label"
+    )
+
+    fig.update_layout(
+        paper_bgcolor="white",
+        legend_title="Categoría"
     )
 
     st.plotly_chart(fig, use_container_width=True)
 
-    st.markdown("<hr>", unsafe_allow_html=True)
-
-    # EVOLUCION
+        # EVOLUCION
     st.subheader("Evolución") 
     evolucion = ( df_contabilidad .groupby(["FECHA", "TIPO"])["MONTO"] .sum() .unstack(fill_value=0) ) 
     st.line_chart(evolucion, color=["#5FA8A8", "#1F3C3D"])
