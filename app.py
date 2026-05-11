@@ -332,14 +332,14 @@ with tab2:
 
     # Licencias comunes nuevas
     licencias_comunes = medico_valores[
-        medico_valores.str.contains("licencia Comun")
+        medico_valores.str.contains("licencia comun")
         & ~medico_valores.str.contains("revalidacion")
     ].count()
 
     # Revalidaciones comunes
     revalidaciones = medico_valores[
         medico_valores.str.contains("revalidacion")
-        & medico_valores.str.contains("licencia Comun")
+        & medico_valores.str.contains("licencia comun")
     ].count()
 
     # Si "comun" no aparece en revalidaciones, probar solo revalid
