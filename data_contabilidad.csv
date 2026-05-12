@@ -57,7 +57,7 @@
 2026-05-01;Ingresos DEBITO Point;INGRESO;0.0;;;;;;;;
 2026-05-01;Ingresos CREDITO Point;INGRESO;0.0;;;;;;;;
 2026-05-01;Ingresos PREPAGA Point;INGRESO;0.0;;;;;;;;
-2026-05-01;Ingresos EFECTIVO;INGRESO;4628000.0;;;;;;;;
+2026-05-01;Ingresos EFECTIVO;INGRESO;8870000.0;;;;;;;;
 2026-05-01;Ingresos DEBITO QR;INGRESO;0.0;;;;;;;;
 2026-05-01;Ingress CREDITO QR;INGRESO;0.0;;;;;;;;
 2026-05-01;Ingresos Dinero en Cta. QR;INGRESO;0.0;;;;;;;;
@@ -85,17 +85,17 @@
 2026-05-01;Honorarios Contador;GASTO;2500000.0;;;;;;;;
 2026-05-01;Maga;GASTO;500000.0;;;;;;;;
 2026-05-01;RRHH;GASTO;2247400.0;;;;;;;;
-2026-05-01;Profesionales;GASTO;0.0;;;;;;;;
+;Profesionales;GASTO;0.0;;;;;;;;
 2026-05-01;Comisiones Vendedor;GASTO;49000.0;;;;;;;;
 2026-05-01;Coaching;GASTO;0.0;;;;;;;;
 2026-05-01;Tecnica;GASTO;0.0;;;;;;;;
-2026-05-01;Viandas;GASTO;154500.0;;;;;;;;
+2026-05-01;Viandas;GASTO;400900.0;;;;;;;;
 2026-05-01;Gastos Limpieza;GASTO;0.0;;;;;;;;
 2026-05-01;Seguros Signos;GASTO;84718.0;;;;;;;;
 2026-05-01;Inversion;GASTO;4174500.0;;;;;;;;
 2026-05-01;Gastos Varios;GASTO;1614057.0;;;;;;;;
 ;Insumos diarios;GASTO;0.0;;;;;;;;
-2026-05-01;Caja chica;GASTO;170100.0;;;;;;;;
+2026-05-01;Caja chica;GASTO;234450.0;;;;;;;;
 2026-05-01;Laboratorio;GASTO;0.0;;;;;;;;
 2026-05-01;Cardiología;GASTO;0.0;;;;;;;;
 2026-05-01;Neurología;GASTO;0.0;;;;;;;;
@@ -107,5 +107,5 @@
 ;Boletas REPAT;GASTO;0.0;;;;;;;;
 ;Boletas RNR;GASTO;0.0;;;;;;;;
 ;FALTANTE;GASTO;0.0;;;;;;;;
-;SOBRANTE;GASTO;0.0;;;;;;;;
+2026-05-01;SOBRANTE;GASTO;250.0;;;;;;;;
 ;Comisiones Mercado PAGO;GASTO;0.0;;;;;;;;
