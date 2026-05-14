@@ -49,15 +49,9 @@
 2026-04-01;FALTANTE;AJUSTE;46000.0;;;;;;;;
 2026-04-01;SOBRANTE;AJUSTE;8000.0;;;;;;;;
 2026-04-01;Comisiones Mercado PAGO;GASTO;982850.38;;;;;;;;
-2026-05-01;Ingresos DEBITO Point;INGRESO;0.0;;;;;;;;
-2026-05-01;Ingresos CREDITO Point;INGRESO;0.0;;;;;;;;
-2026-05-01;Ingresos PREPAGA Point;INGRESO;0.0;;;;;;;;
+2026-05-01;Ingresos por Mercado Pago;INGRESO;0.0;;;;;;;;
+2026-05-01;Rendimientos;INGRESO;0.0;;;;;;;;
 2026-05-01;Ingresos EFECTIVO;INGRESO;8870000.0;;;;;;;;
-2026-05-01;Ingresos DEBITO QR;INGRESO;0.0;;;;;;;;
-2026-05-01;Ingress CREDITO QR;INGRESO;0.0;;;;;;;;
-2026-05-01;Ingresos Dinero en Cta. QR;INGRESO;0.0;;;;;;;;
-2026-05-01;Ingresos TRANSFERENCIAS QR;INGRESO;0.0;;;;;;;;
-2026-05-01;Ingresos TRASNFERENCIAS;INGRESO;0.0;;;;;;;;
 2026-05-01;Ingresos SANTANDER;INGRESO;0.0;;;;;;;;
 2026-05-01;Ingresos E-CHEQ;INGRESO;0.0;;;;;;;;
 2026-05-01;Alquiler Local;GASTO;1477311.0;;;;;;;;
@@ -102,6 +96,6 @@
 2026-05-01;Ergometria;GASTO;0.0;;;;;;;;
 ;Boletas REPAT;GASTO;0.0;;;;;;;;
 ;Boletas RNR;GASTO;0.0;;;;;;;;
-;FALTANTE;GASTO;0.0;;;;;;;;
-2026-05-01;SOBRANTE;GASTO;250.0;;;;;;;;
+;FALTANTE;AJUSTE;0.0;;;;;;;;
+2026-05-01;SOBRANTE;AJUSTE;250.0;;;;;;;;
 ;Comisiones Mercado PAGO;GASTO;0.0;;;;;;;;
