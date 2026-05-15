@@ -51,7 +51,7 @@
 2026-04-01;Comisiones Mercado PAGO;GASTO;982850.38;;;;;;;;
 2026-05-01;Ingresos por Mercado Pago;INGRESO;0.0;;;;;;;;
 2026-05-01;Rendimientos;INGRESO;0.0;;;;;;;;
-2026-05-01;Ingresos EFECTIVO;INGRESO;8870000.0;;;;;;;;
+2026-05-01;Ingresos EFECTIVO;INGRESO;12414800.0;;;;;;;;
 2026-05-01;Ingresos SANTANDER;INGRESO;0.0;;;;;;;;
 2026-05-01;Ingresos E-CHEQ;INGRESO;0.0;;;;;;;;
 2026-05-01;Alquiler Local;GASTO;1477311.0;;;;;;;;
@@ -97,5 +97,5 @@
 ;Boletas REPAT;GASTO;0.0;;;;;;;;
 ;Boletas RNR;GASTO;0.0;;;;;;;;
 ;FALTANTE;AJUSTE;0.0;;;;;;;;
-2026-05-01;SOBRANTE;AJUSTE;250.0;;;;;;;;
+2026-05-01;SOBRANTE;AJUSTE;450.0;;;;;;;;
 ;Comisiones Mercado PAGO;GASTO;0.0;;;;;;;;
