@@ -234,8 +234,9 @@ with tab1:
     st.markdown("<hr>", unsafe_allow_html=True)
 
     # ---------------- RECEPCIONISTA
-    st.subheader("Atención por recepcionista")
-    
+    st.subheader("Ventas online por recepcionista")
+
+    # Limpiar columna
     df_general["ONLINE"] = (
         df_general["ONLINE"]
         .fillna("")
@@ -243,27 +244,31 @@ with tab1:
         .str.strip()
     )
 
-    df_general["TIPO_ATENCION"] = df_general["ONLINE"].str.lower().apply(
-        lambda x: "ONLINE" if "online" in x else "PAPELES"
-    )
-
-    df_filtrado = df_general[
-    df_general["TIPO_DE_TRAMITE"].fillna("").str.lower().str.contains("licencia comun", na=False)
+    # Filtrar solo registros online reales
+    df_online = df_general[
+        ~df_general["ONLINE"].str.lower().isin(["", "no aplica"])
     ]
 
-    recep = df_filtrado.groupby(["RECEPCIONISTA", "TIPO_ATENCION"]).size().unstack(fill_value=0)
-    # Asegurar columnas
-    for col in ["ONLINE", "PAPELES"]:
-        if col not in recep.columns:
-            recep[col] = 0
-    recep = recep.reset_index()
+    # Contar cuántos online vendió cada recepcionista
+    online_recep = (
+        df_online["ONLINE"]
+        .value_counts()
+        .reset_index()
+    )
 
+    online_recep.columns = ["RECEPCIONISTA", "CANTIDAD"]
+
+    # Gráfico
     fig = px.bar(
-        recep,
+        online_recep,
         x="RECEPCIONISTA",
-        y=["ONLINE", "PAPELES"],
-        barmode="stack",
-        color_discrete_sequence=[COLOR_PRINCIPAL, COLOR_SECUNDARIO]
+        y="CANTIDAD",
+        color_discrete_sequence=[COLOR_PRINCIPAL],
+        text="CANTIDAD"
+    )
+
+    fig.update_traces(
+        textposition="outside"
     )
 
     st.plotly_chart(fig, use_container_width=True)
