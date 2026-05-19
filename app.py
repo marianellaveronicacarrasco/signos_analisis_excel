@@ -234,7 +234,7 @@ with tab1:
     st.markdown("<hr>", unsafe_allow_html=True)
 
     # ---------------- RECEPCIONISTA
-     st.subheader("Atención por recepcionista")
+    st.subheader("Atención por recepcionista")
     
     df_general["ONLINE"] = (
         df_general["ONLINE"]
