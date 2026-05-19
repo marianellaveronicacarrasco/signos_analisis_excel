@@ -591,7 +591,19 @@ with tab4:
     st.subheader("Gasto promedio por persona atendida")
 
     # Total personas atendidas
-    total_personas = len(df_general) + len(df_papeles)
+    medico_valores = (
+        df_general["MEDICO"]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+        .str.lower()
+    )
+
+    df_sin_revalidaciones = df_general[
+        ~medico_valores.str.contains("revalidacion")
+    ]
+
+    total_personas = len(df_sin_revalidaciones)
 
     # Evitar división por cero
     gasto_por_persona = gastos / total_personas if total_personas > 0 else 0
