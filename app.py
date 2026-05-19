@@ -503,6 +503,61 @@ with tab3:
     st.subheader("Ingresos en el tiempo") 
     st.line_chart(df_lineas,color=["#5FA8A8", "#1F3C3D","#9476DB"])
 
+    # ---------------- PAPELES MÁS TRAMITADOS
+    st.markdown("<hr>", unsafe_allow_html=True)
+    st.subheader("Distribución de papeles tramitados")
+
+    papeles_cols = [
+        "REP",
+        "RNR",
+        "RAP",
+        "RAM",
+        "VOTO",
+        "FOT._LIC",
+        "FOT._DNI"
+    ]
+
+    conteo_papeles = {}
+
+    for col in papeles_cols:
+        if col in df_papeles.columns:
+            conteo_papeles[col] = (
+                df_papeles[col]
+                .astype(str)
+                .str.strip()
+                .replace("", "False")
+                .isin(["✔", "TRUE", "True", "1"])
+                .sum()
+            )
+
+    papeles_df = pd.DataFrame({
+        "Papel": conteo_papeles.keys(),
+        "Cantidad": conteo_papeles.values()
+    })
+
+    papeles_df = papeles_df[papeles_df["Cantidad"] > 0]
+
+    fig = px.pie(
+        papeles_df,
+        names="Papel",
+        values="Cantidad",
+        color_discrete_sequence=[
+            COLOR_PRINCIPAL,
+            COLOR_SECUNDARIO,
+            "#9476DB",
+            "#EB6E9E",
+            "#EBB56E",
+            "#E3EB6E",
+            "#6EEB9E"
+        ]
+    )
+
+    fig.update_traces(
+        textinfo="label+value+percent"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
 # ================== TAB 4 ==================
 with tab4:
     # 🔥 Excluir faltantes y sobrantes
