@@ -600,7 +600,7 @@ with tab4:
     )
 
     df_sin_revalidaciones = df_general[
-        ~medico_valores.str.contains("revalidacion")
+        ~medico_valores.str.contains("reval")
     ]
 
     total_personas = len(df_sin_revalidaciones)
