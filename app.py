@@ -335,9 +335,10 @@ with tab2:
 
     # ---------------- REVALIDACIONES LICENCIAS COMUNES
     st.markdown("<hr>", unsafe_allow_html=True)
-    st.subheader("Licencias comunes vs Revalidaciones")
+    st.subheader("Revalidaciones e Interconsultas")
 
-    # Normalizar columnas
+    # ---------------- NORMALIZAR
+
     tipo_tramite = (
         df_general["TIPO_DE_TRAMITE"]
         .fillna("")
@@ -354,57 +355,66 @@ with tab2:
         .str.lower()
     )
 
-    # Filtrar solo trámites de licencia común
+# ---------------- SOLO LICENCIA COMUN
+
     filtro_licencia_comun = (
         tipo_tramite.str.contains("licencia", na=False) &
         tipo_tramite.str.contains("comun", na=False)
-    )    
-
-    df_licencia_comun = df_general[filtro_licencia_comun]
+    )
 
     medico_filtrado = medico_valores[filtro_licencia_comun]
 
-    # Nuevas
-    licencias_comunes = medico_filtrado[
-        ~medico_filtrado.str.contains("revalid", na=False)
+    # ---------------- CANTIDADES
+
+    total_licencias = medico_filtrado[
+        ~medico_filtrado.str.contains("revalid|interconsulta", na=False)
     ].count()
 
-    # Revalidaciones
     revalidaciones = medico_filtrado[
         medico_filtrado.str.contains("revalid", na=False)
     ].count()
 
-    # Dataframe
+    interconsultas = medico_filtrado[
+        medico_filtrado.str.contains("interconsulta", na=False)
+    ].count()
+
+    # ---------------- DATAFRAME
+
     medico_df = pd.DataFrame({
-        "Tipo": ["Licencias nuevas", "Revalidaciones"],
-        "Cantidad": [licencias_comunes, revalidaciones]
+        "Tipo": [
+            "Licencias comunes",
+            "Revalidaciones",
+            "Interconsultas"
+        ],
+        "Cantidad": [
+            total_licencias,
+            revalidaciones,
+            interconsultas
+        ]
     })
 
-    # Mostrar solo si hay datos
-    if medico_df["Cantidad"].sum() > 0:
+    # ---------------- GRAFICO
 
-        fig = px.pie(
-            medico_df,
-            names="Tipo",
-            values="Cantidad",
-            color_discrete_sequence=[
-                COLOR_PRINCIPAL,
-                COLOR_SECUNDARIO
-            ]
-        )
+    fig = px.pie(
+        medico_df,
+        names="Tipo",
+        values="Cantidad",
+        color_discrete_sequence=[
+            COLOR_PRINCIPAL,
+            COLOR_SECUNDARIO,
+            "#EB6E9E"
+        ]
+    )
 
-        fig.update_traces(
-            textinfo="percent+label"
-        )
+    fig.update_traces(
+        textinfo="percent+label"
+    )
 
-        fig.update_layout(
-            paper_bgcolor="white"
-        )
-    
-        st.plotly_chart(fig, use_container_width=True)
+    fig.update_layout(
+        paper_bgcolor="white"
+    )
 
-    else:
-        st.warning("No se encontraron datos de Licencia Común.")
+    st.plotly_chart(fig, use_container_width=True)
 
 # ================== TAB 3 ==================
 with tab3: 
