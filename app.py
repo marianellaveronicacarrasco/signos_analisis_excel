@@ -277,31 +277,6 @@ with tab1:
 with tab2:
     st.subheader("Estudios realizados")
 
-    conteo = valores.value_counts().reset_index()
-    conteo.columns = ["Tipo", "Cantidad"]
-
-    # TOTAL
-    total_estudios = conteo["Cantidad"].sum()
-
-    st.metric(
-        label=f"Total de {estudio.lower()} realizados",
-        value=total_estudios
-    )
-
-    fig = px.bar(
-        conteo,
-        x="Tipo",
-        y="Cantidad",
-        color_discrete_sequence=[COLOR_PRINCIPAL],
-        text="Cantidad"
-    )
-
-    fig.update_traces(
-        textposition="outside"
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
-
     estudio = st.selectbox(
         "Tipo de estudio",
         [
@@ -324,12 +299,10 @@ with tab2:
         .str.lower()
     )
 
-    valores = valores[~valores.isin(["", "no aplica", "nan"])]
-
     # Limpiar vacíos
     valores = valores[~valores.isin(["", "no aplica", "nan"])]
 
-    # 🔥 Si es médico, excluir revalidaciones
+    # Si es médico, excluir revalidaciones
     if estudio == "MEDICO":
         valores = valores[
             ~valores.str.contains("revalid", na=False)
@@ -338,11 +311,24 @@ with tab2:
     conteo = valores.value_counts().reset_index()
     conteo.columns = ["Tipo", "Cantidad"]
 
+    # TOTAL
+    total_estudios = conteo["Cantidad"].sum()
+
+    st.metric(
+        label=f"Total de {estudio.lower()} realizados",
+        value=total_estudios
+    )
+
     fig = px.bar(
         conteo,
         x="Tipo",
         y="Cantidad",
-        color_discrete_sequence=[COLOR_PRINCIPAL]
+        color_discrete_sequence=[COLOR_PRINCIPAL],
+        text="Cantidad"
+    )
+
+    fig.update_traces(
+        textposition="outside"
     )
 
     st.plotly_chart(fig, use_container_width=True)
