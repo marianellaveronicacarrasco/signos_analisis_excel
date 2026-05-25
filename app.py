@@ -658,15 +658,32 @@ with tab4:
     # TORTA
     st.subheader("Ingresos vs Gastos")
 
-    fig = px.pie(
-        values=[ingresos, gastos],
-        names=["Ingresos", "Gastos"],
-        color_discrete_sequence=[COLOR_PRINCIPAL, COLOR_SECUNDARIO]
+    fig = px.bar(
+        x=["Ingresos", "Gastos"],
+        y=[ingresos, gastos],
+        color=["Ingresos", "Gastos"],
+        text=[
+            f"${ingresos:,.0f}",
+            f"${gastos:,.0f}"
+        ],
+        color_discrete_sequence=[
+            COLOR_PRINCIPAL,
+            COLOR_SECUNDARIO
+        ]
+    )
+
+    fig.update_traces(
+        textposition="outside"
+    )    
+
+    fig.update_layout(
+        showlegend=False,
+        xaxis_title="",
+        yaxis_title="Monto",
+        paper_bgcolor="white"
     )
 
     st.plotly_chart(fig, use_container_width=True)
-
-    st.markdown("<hr>", unsafe_allow_html=True)
 
     # GASTOS
     st.subheader("Gastos por categoría")
