@@ -720,6 +720,9 @@ with tab4:
     fig.update_traces(
         textposition="outside"
     )
+    fig.update_layout(
+        height=900
+    )
 
     st.plotly_chart(fig, use_container_width=True)
 
