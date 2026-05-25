@@ -701,27 +701,24 @@ with tab4:
         .reset_index()
     )
 
-    fig = px.pie(
+    fig = px.bar(
         gastos_cat,
-        names="CONCEPTO",
-        values="MONTO",
-        color_discrete_sequence=[
-            COLOR_PRINCIPAL,
-            COLOR_SECUNDARIO,
-            "#9476DB",
-            "#EB6E9E",
-            "#EBB56E",
-            "#E3EB6E"
-        ]
+        x="MONTO",
+        y="CONCEPTO",
+        orientation="h",
+        text="MONTO",
+        color="CONCEPTO"
+    )
+    
+    fig.update_layout(
+        showlegend=False,
+        paper_bgcolor="white",
+        xaxis_title="Monto",
+        yaxis_title="Categoría"
     )
 
     fig.update_traces(
-        textinfo="percent+label"
-    )
-
-    fig.update_layout(
-        paper_bgcolor="white",
-        legend_title="Categoría"
+        textposition="outside"
     )
 
     st.plotly_chart(fig, use_container_width=True)
