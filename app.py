@@ -648,6 +648,9 @@ with tab4:
         "Ingreso promedio por persona",
         f"${gasto_por_persona:,.0f}"
     )
+    
+    st.subheader("Ingresos vs Gastos")
+
     balance = ingresos - gastos
 
     col1, col2, col3 = st.columns(3)
@@ -657,7 +660,6 @@ with tab4:
     col3.metric("Balance", f"${balance:,.0f}", delta=f"${balance:,.0f}")
 
     st.markdown("<hr>", unsafe_allow_html=True)
-    st.subheader("Ingresos vs Gastos")
 
     fig = px.bar(
         x=["Ingresos", "Gastos"],
