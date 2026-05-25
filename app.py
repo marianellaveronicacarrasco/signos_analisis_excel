@@ -525,7 +525,7 @@ with tab3:
     st.line_chart(df_lineas,color=["#5FA8A8", "#1F3C3D","#9476DB"])
 
     # ---------------- PAPELES MÁS TRAMITADOS
-   fig = px.bar(
+    fig = px.bar(
         papeles_df,
         x="Papel",
         y="Cantidad",
