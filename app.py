@@ -643,6 +643,8 @@ with tab4:
 
 # Evitar división por cero
     gasto_por_persona = gastos / total_personas if total_personas > 0 else 0
+
+    st.markdown("<hr>", unsafe_allow_html=True)
     # Mostrar
     st.metric(
         "Ingreso promedio por persona",
@@ -659,7 +661,7 @@ with tab4:
     col2.metric("Gastos", f"${gastos:,.0f}")
     col3.metric("Balance", f"${balance:,.0f}", delta=f"${balance:,.0f}")
 
-    st.markdown("<hr>", unsafe_allow_html=True)
+    
 
     fig = px.bar(
         x=["Ingresos", "Gastos"],
