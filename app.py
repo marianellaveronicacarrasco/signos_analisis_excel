@@ -613,10 +613,10 @@ with tab4:
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-        # ---------------- GASTO PROMEDIO POR PERSONA
+# ---------------- GASTO PROMEDIO POR PERSONA
     st.subheader("Gasto promedio por persona atendida")
 
-    # Total personas atendidas
+    # Normalizar médico
     medico_valores = (
         df_general["MEDICO"]
         .fillna("")
@@ -625,29 +625,31 @@ with tab4:
         .str.lower()
     )
 
-    df_sin_revalidaciones = df_general[
-        ~medico_valores.str.contains("reval")
+    # Crear total pagado
+    df_general["TOTAL_PAGADO"] = (
+        df_general["MONTO_EN_EFECTIVO"] +
+        df_general["MONTO_EN_MERCADOPAGO"] +
+        df_general["MONTO_EN_SANTANDER"]
+    )
+
+# Filtrar:
+# - sin revalidaciones
+# - sin interconsultas
+# - solo quienes pagaron algo
+
+    df_filtrado = df_general[
+        ~medico_valores.str.contains("revalid|interconsulta", na=False)
     ]
 
-    total_personas = len(df_sin_revalidaciones)
+    df_filtrado = df_filtrado[
+        df_filtrado["TOTAL_PAGADO"] > 0
+    ]
 
-    # Evitar división por cero
+# Total personas reales
+    total_personas = len(df_filtrado)
+
+# Evitar división por cero
     gasto_por_persona = gastos / total_personas if total_personas > 0 else 0
-
-    # Métrica principal
-    col1, col2 = st.columns(2)
-
-    col1.metric(
-       "Costo promedio por persona",
-      f"${gasto_por_persona:,.2f}"
-    )
-
-    col2.metric(
-        "Total personas atendidas",
-        f"{total_personas:,}"
-    )
-
-    st.markdown("<hr>", unsafe_allow_html=True)
     # TORTA
     st.subheader("Ingresos vs Gastos")
 
