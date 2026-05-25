@@ -644,13 +644,13 @@ with tab4:
 # Evitar división por cero
     gasto_por_persona = gastos / total_personas if total_personas > 0 else 0
 
-    st.markdown("<hr>", unsafe_allow_html=True)
+   
     # Mostrar
     st.metric(
         "Ingreso promedio por persona",
         f"${gasto_por_persona:,.0f}"
     )
-    
+    st.markdown("<hr>", unsafe_allow_html=True)
     st.subheader("Ingresos vs Gastos")
 
     balance = ingresos - gastos
