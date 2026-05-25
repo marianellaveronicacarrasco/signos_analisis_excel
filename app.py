@@ -586,34 +586,7 @@ with tab3:
 
 # ================== TAB 4 ==================
 with tab4:
-    # 🔥 Excluir faltantes y sobrantes
-    df_conta_filtrado = df_contabilidad[
-        ~df_contabilidad["CONCEPTO"]
-        .astype(str)
-        .str.upper()
-        .str.strip()
-        .isin(["FALTANTE", "SOBRANTE"])
-    ]
-
-    ingresos = df_conta_filtrado[
-        df_conta_filtrado["TIPO"] == "INGRESO"
-    ]["MONTO"].sum()
-
-    gastos = df_conta_filtrado[
-        df_conta_filtrado["TIPO"] == "GASTO"
-    ]["MONTO"].sum()
-
-    balance = ingresos - gastos
-
-    col1, col2, col3 = st.columns(3)
-
-    col1.metric("Ingresos", f"${ingresos:,.0f}")
-    col2.metric("Gastos", f"${gastos:,.0f}")
-    col3.metric("Balance", f"${balance:,.0f}", delta=f"${balance:,.0f}")
-
-    st.markdown("<hr>", unsafe_allow_html=True)
-
-# ---------------- GASTO PROMEDIO POR PERSONA
+    # ---------------- GASTO PROMEDIO POR PERSONA
     st.subheader("Gasto promedio por persona atendida")
 
     # Normalizar médico
@@ -655,7 +628,34 @@ with tab4:
         "Ingreso promedio por persona",
         f"${gasto_por_persona:,.0f}"
     )
-    # TORTA
+    # 🔥 Excluir faltantes y sobrantes
+    df_conta_filtrado = df_contabilidad[
+        ~df_contabilidad["CONCEPTO"]
+        .astype(str)
+        .str.upper()
+        .str.strip()
+        .isin(["FALTANTE", "SOBRANTE"])
+    ]
+
+    ingresos = df_conta_filtrado[
+        df_conta_filtrado["TIPO"] == "INGRESO"
+    ]["MONTO"].sum()
+
+    gastos = df_conta_filtrado[
+        df_conta_filtrado["TIPO"] == "GASTO"
+    ]["MONTO"].sum()
+
+    balance = ingresos - gastos
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric("Ingresos", f"${ingresos:,.0f}")
+    col2.metric("Gastos", f"${gastos:,.0f}")
+    col3.metric("Balance", f"${balance:,.0f}", delta=f"${balance:,.0f}")
+
+    st.markdown("<hr>", unsafe_allow_html=True)
+
+
     st.subheader("Ingresos vs Gastos")
 
     fig = px.bar(
