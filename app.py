@@ -729,5 +729,5 @@ with tab4:
         # EVOLUCION
     st.subheader("Evolución") 
     evolucion = ( df_contabilidad .groupby(["FECHA", "TIPO"])["MONTO"] .sum() .unstack(fill_value=0) ) 
-    st.line_chart(evolucion, color=["#5FA8A8", "#1F3C3D"])
+    st.line_chart(evolucion)
 
