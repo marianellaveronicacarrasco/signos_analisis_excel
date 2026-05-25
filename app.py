@@ -176,13 +176,14 @@ tab1, tab2, tab3, tab4 = st.tabs(["General", "Estudios", "Economía", "Contabili
 
 # ================== TAB 1 ==================
 with tab1:
-    # FILTRAR SIN REVALIDACIONES
+
+    # FILTRAR SIN REVALIDACIONES NI INTERCONSULTAS
     df_filtrado = df_general[
         ~df_general["MEDICO"]
         .fillna("")
         .astype(str)
         .str.lower()
-        .str.contains("Revalidacion", na=False)
+        .str.contains("revalidación|interconsulta", na=False)
     ]
 
     # ---------------- MOVIMIENTO
@@ -195,7 +196,6 @@ with tab1:
     ).size()
 
     st.line_chart(personas_dia, color="#5FA8A8")
-
     # ---------------- TORTA
     st.subheader("Distribución por tipo de trámite")
 
