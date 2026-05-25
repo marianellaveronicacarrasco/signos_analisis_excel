@@ -524,6 +524,35 @@ with tab3:
     st.subheader("Ingresos en el tiempo") 
     st.line_chart(df_lineas,color=["#5FA8A8", "#1F3C3D","#9476DB"])
 
+    papeles_cols = [
+        "REP",
+        "RNR",
+        "RAP",
+        "RAM",
+        "VOTO",
+        "FOT._LIC",
+        "FOT._DNI"
+    ]
+
+    conteo_papeles = {}
+
+    for col in papeles_cols:
+        if col in df_papeles.columns:
+            conteo_papeles[col] = (
+                df_papeles[col]
+                .astype(str)
+                .str.strip()
+                .replace("", "False")
+                .isin(["✔", "TRUE", "True", "1"])
+                .sum()
+            )
+
+    papeles_df = pd.DataFrame({
+        "Papel": conteo_papeles.keys(),
+        "Cantidad": conteo_papeles.values()
+    })
+
+    papeles_df = papeles_df[papeles_df["Cantidad"] > 0]
     # ---------------- PAPELES MÁS TRAMITADOS
     fig = px.bar(
         papeles_df,
