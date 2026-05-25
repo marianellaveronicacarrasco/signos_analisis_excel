@@ -698,7 +698,6 @@ with tab4:
         .groupby("CONCEPTO")["MONTO"]
         .sum()
         .sort_values(ascending=False)
-        .head(10)
         .reset_index()
     )
 
