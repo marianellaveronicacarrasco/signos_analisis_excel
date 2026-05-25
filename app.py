@@ -650,6 +650,11 @@ with tab4:
 
 # Evitar división por cero
     gasto_por_persona = gastos / total_personas if total_personas > 0 else 0
+    # Mostrar
+    st.metric(
+        "Ingreso promedio por persona",
+        f"${gasto_por_persona:,.0f}"
+    )
     # TORTA
     st.subheader("Ingresos vs Gastos")
 
