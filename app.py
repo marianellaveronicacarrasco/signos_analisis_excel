@@ -277,6 +277,31 @@ with tab1:
 with tab2:
     st.subheader("Estudios realizados")
 
+    conteo = valores.value_counts().reset_index()
+    conteo.columns = ["Tipo", "Cantidad"]
+
+    # TOTAL
+    total_estudios = conteo["Cantidad"].sum()
+
+    st.metric(
+        label=f"Total de {estudio.lower()} realizados",
+        value=total_estudios
+    )
+
+    fig = px.bar(
+        conteo,
+        x="Tipo",
+        y="Cantidad",
+        color_discrete_sequence=[COLOR_PRINCIPAL],
+        text="Cantidad"
+    )
+
+    fig.update_traces(
+        textposition="outside"
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
     estudio = st.selectbox(
         "Tipo de estudio",
         [
