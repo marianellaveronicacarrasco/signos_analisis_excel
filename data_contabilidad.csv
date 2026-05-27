@@ -51,7 +51,7 @@
 2026-04-01;Comisiones Mercado PAGO;GASTO;982850.38;;;;;;;;
 2026-05-01;Ingresos por Mercado Pago;INGRESO;0.0;;;;;;;;
 2026-05-01;Rendimientos;INGRESO;0.0;;;;;;;;
-2026-05-01;Ingresos EFECTIVO;INGRESO;12414800.0;;;;;;;;
+2026-05-01;Ingresos EFECTIVO;INGRESO;23234400.0;;;;;;;;
 2026-05-01;Ingresos SANTANDER;INGRESO;0.0;;;;;;;;
 2026-05-01;Ingresos E-CHEQ;INGRESO;1620661.9;;;;;;;;
 2026-05-01;Alquiler Local;GASTO;1477311.0;;;;;;;;
@@ -78,14 +78,15 @@
 2026-05-01;Comisiones Vendedor;GASTO;49000.0;;;;;;;;
 2026-05-01;Coaching;GASTO;533000.0;;;;;;;;
 2026-05-01;Tecnica;GASTO;0.0;;;;;;;;
-2026-05-01;Viandas;GASTO;400900.0;;;;;;;;
+2026-05-01;Viandas;GASTO;767400.0;;;;;;;;
 2026-05-01;Viandas Profesionales;GASTO;0.0;;;;;;;;
 2026-05-01;Gastos Limpieza;GASTO;0.0;;;;;;;;
 2026-05-01;Seguros Signos;GASTO;84718.0;;;;;;;;
 2026-05-01;Inversion;GASTO;4174500.0;;;;;;;;
 2026-05-01;Gastos Varios;GASTO;1614057.0;;;;;;;;
 ;Insumos diarios;GASTO;0.0;;;;;;;;
-2026-05-01;Caja chica;GASTO;234450.0;;;;;;;;
+2026-05-01;Gastos Libreria;GASTO;84850.0;;;;;;;;
+2026-05-01;Caja chica;GASTO;270950.0;;;;;;;;
 2026-05-01;Laboratorio;GASTO;800000.0;;;;;;;;
 2026-05-01;Cardiología;GASTO;260000.0;;;;;;;;
 2026-05-01;Neurología;GASTO;100000.0;;;;;;;;
