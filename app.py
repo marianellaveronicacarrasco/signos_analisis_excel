@@ -233,10 +233,10 @@ with tab1:
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    # ---------------- RECEPCIONISTA
+# ---------------- RECEPCIONISTA
     st.subheader("Ventas online por recepcionista")
 
-    # Limpiar columna
+    # Limpiar columna ONLINE
     df_general["ONLINE"] = (
         df_general["ONLINE"]
         .fillna("")
@@ -244,9 +244,19 @@ with tab1:
         .str.strip()
     )
 
+    # Filtrar solo Licencia Común
+    df_filtrado = df_general[
+        df_general["TIPO_DE_TRAMITE"]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+        .str.lower()
+        .str.contains("licencia comun", na=False)
+    ]
+
     # Filtrar solo registros online reales
-    df_online = df_general[
-        ~df_general["ONLINE"].str.lower().isin(["", "no aplica"])
+    df_online = df_filtrado[
+        ~df_filtrado["ONLINE"].str.lower().isin(["", "no aplica"])
     ]
 
     # Contar cuántos online vendió cada recepcionista
