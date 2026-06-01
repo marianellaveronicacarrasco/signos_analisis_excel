@@ -365,49 +365,11 @@ with tab2:
         .str.lower()
     )
 
-# ---------------- SOLO LICENCIA COMUN
-
-    filtro_licencia_comun = (
-        tipo_tramite.str.contains("licencia", na=False) &
-        tipo_tramite.str.contains("comun", na=False)
-    )
-
-    medico_filtrado = medico_valores[filtro_licencia_comun]
-
-    # ---------------- CANTIDADES
-
-    total_licencias = medico_filtrado[
-        ~medico_filtrado.str.contains("revalid|interconsulta", na=False)
-    ].count()
-
-    revalidaciones = medico_filtrado[
-        medico_filtrado.str.contains("revalid", na=False)
-    ].count()
-
-    interconsultas = medico_filtrado[
-        medico_filtrado.str.contains("interconsulta", na=False)
-    ].count()
-
-    # ---------------- DATAFRAME
-
-    medico_df = pd.DataFrame({
-        "Tipo": [
-            "Licencias comunes",
-            "Revalidaciones",
-            "Interconsultas"
-        ],
-        "Cantidad": [
-            total_licencias,
-            revalidaciones,
-            interconsultas
-        ]
-    })
 
     # ---------------- GRAFICO
 
 # ---------------- LICENCIAS VS RETORNOS
-    st.markdown("<hr>", unsafe_allow_html=True)
-    st.subheader("¿Qué pasó con las licencias comunes?")
+    
 
     # Normalizar columnas
     tipo_tramite = (
