@@ -405,6 +405,65 @@ with tab2:
 
     # ---------------- GRAFICO
 
+# ---------------- LICENCIAS VS RETORNOS
+    st.markdown("<hr>", unsafe_allow_html=True)
+    st.subheader("¿Qué pasó con las licencias comunes?")
+
+    # Normalizar columnas
+    tipo_tramite = (
+        df_general["TIPO_DE_TRAMITE"]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+         .str.lower()
+    )
+
+    medico = (
+        df_general["MEDICO"]
+        .fillna("")
+        .astype(str)
+        .str.strip()
+        .str.lower()
+    )
+
+    # Total de licencias comunes
+    licencias_comunes = tipo_tramite.str.contains(
+        "licencia comun",
+        na=False
+    ).sum()
+
+    # Revalidaciones
+    revalidaciones = medico.str.contains(
+        "revalid",
+        na=False
+    ).sum()
+
+    # Interconsultas
+    interconsultas = medico.str.contains(
+        "interconsulta",
+        na=False
+    ).sum()
+
+    # Licencias que no volvieron
+    sin_volver = max(
+        licencias_comunes - revalidaciones - interconsultas,
+        0
+    )
+
+    # Dataframe para la torta
+    medico_df = pd.DataFrame({
+        "Tipo": [
+            "Sin volver",
+            "Revalidación",
+            "Interconsulta"
+        ],
+        "Cantidad": [
+            sin_volver,
+            revalidaciones,
+            interconsultas
+        ]
+    })
+
     fig = px.pie(
         medico_df,
         names="Tipo",
@@ -413,7 +472,7 @@ with tab2:
             COLOR_PRINCIPAL,
             COLOR_SECUNDARIO,
             "#EB6E9E"
-        ]
+           ]
     )
 
     fig.update_traces(
