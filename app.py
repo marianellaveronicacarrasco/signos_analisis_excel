@@ -408,7 +408,7 @@ with tab2:
 
     # Licencias que no volvieron
     sin_volver = max(
-        licencias_comunes - revalidaciones - interconsultas,
+        licencias_comunes - (revalidaciones * 2) - (interconsultas * 2),
         0
     )
 
