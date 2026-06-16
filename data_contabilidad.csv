@@ -107,7 +107,7 @@
 2026-06-01;Ingresos E-CHEQ;INGRESO;0.0;;;;;;;;;
 2026-06-01;Alquiler Local;GASTO;1477311.0;;;1477311;;;;;;
 2026-06-01;Luz;GASTO;360961.0;;;360961;;;;;;
-2026-06-01;Gas;GASTO;114017.0;;;114017;;;;;;
+2026-06-01;Gas;GASTO;114017.0;;;250000;;;;;;
 2026-06-01;Internet;GASTO;0.0;;;90000;;;;;;
 2026-06-01;Movistar;GASTO;34153.0;;;50000;;;;;;
 2026-06-01;Servicio Limpieza;GASTO;630000.0;;;;;;;;;
@@ -122,7 +122,7 @@
 2026-06-01;Cargas sociales;GASTO;4428603.79;;;;;;;;;
 2026-06-01;Sindicato;GASTO;71000.76;;;;;;;;;
 2026-06-01;Aguinaldos;GASTO;0.0;;;;;;;;;
-2026-06-01;Honorarios Contador;GASTO;2500000.0;;;;;;;;;
+2026-06-01;Honorarios Contador;GASTO;2500000.0;;;1000000;;;;;;
 2026-06-01;Maga;GASTO;2500000.0;;;;;;;;;
 2026-06-01;RRHH;GASTO;2500000.0;;;;;;;;;
 2026-06-01;Profesionales;GASTO;14225600.0;;;;;;;;;
@@ -150,4 +150,4 @@
 2026-06-01;Boletas RNR;GASTO;0.0;;;;;;;;;
 2026-06-01;FALTANTE;AJUSTE;0.0;;;;;;;;;
 2026-06-01;SOBRANTE;AJUSTE;0.0;;;;;;;;;
-2026-06-01;Comisiones Mercado PAGO;GASTO;0.0;;;1000000;;;;;;
+2026-06-01;Comisiones Mercado PAGO;GASTO;0.0;;;500000;;;;;;
