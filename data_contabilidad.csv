@@ -162,14 +162,14 @@
 2026-07-01;Internet;GASTO;136500.0;;;;;;;;;
 2026-07-01;Movistar;GASTO;82687.18;36047;;;;;;;;
 2026-07-01;Servicio Limpieza;GASTO;702000.0;;;;;;;;;
-2026-07-01;Autónomos;GASTO;72447.0;;;;;;;;;
+2026-07-01;Autónomos;GASTO;72447.0;74003;;;;;;;;
 2026-07-01;Monotributo;GASTO;447347.0;;;;;;;;;
 2026-07-01;Ingresos Brutos;GASTO;1030659.0;992599;;;;;;;;
-2026-07-01;IVA;GASTO;4179902.46;;;;;;;;;
+2026-07-01;IVA;GASTO;4179902.46;2063099;;;;;;;;
 ;Impuesto a las Ganancias;GASTO;0.0;;;;;;;;;
 2026-07-01;Sueldos blanco;GASTO;10755659.0;9014640;;;;;;;;
 2026-07-01;Sueldos negro;GASTO;4304900.97;1455319;;;;;;;;
-2026-07-01;Cargas sociales;GASTO;8131142.0;;;;;;;;;
+2026-07-01;Cargas sociales;GASTO;8131142.0;4791887;;;;;;;;
 2026-07-01;Sindicato;GASTO;187717.0;;;;;;;;;
 ;Aguinaldos;GASTO;0.0;;;;;;;;;
 2026-07-01;Honorarios Contador;GASTO;2500000.0;;;;;;;;;
