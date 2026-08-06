@@ -16,18 +16,26 @@ creds = Credentials.from_service_account_info(
 
 client = gspread.authorize(creds)
 
-# Nuevo Google Sheet (General y Papeles)
-spreadsheet = client.open_by_key("1dN-kjwx-D2i78DEODVhqaJof3Earj_zKFlz3V-lwAkw")
+# Spreadsheet original para General y Papeles
+spreadsheet = client.open_by_key("1s3PvG-ob2P-KsgrdO4IyFxC8kVICHWNgiwOTiyF2BRQ")
 
-# Mantenemos el spreadsheet anterior para contabilidad
-spreadsheet_conta = client.open_by_key("1owTaWpPgb3LHMhgctAgDPCxheounko_FVeFArTN4T3o")
+# Nuevo Google Sheet para contabilidad
+spreadsheet_conta = client.open_by_key("1dN-kjwx-D2i78DEODVhqaJof3Earj_zKFlz3V-lwAkw")
 
-sheet_contabilidad = spreadsheet_conta.worksheet("INGRESOS Y GASTOS")
+sheet_contabilidad = spreadsheet_conta.worksheet("Sheet1")
 data_contabilidad = sheet_contabilidad.get_all_values()
 
+# Encontrar la fila de cabeceras dinámicamente (por ejemplo, la que tiene 'fecha' y 'monto')
+headers_row_idx = 0
+for idx, row in enumerate(data_contabilidad):
+    row_lower = [str(cell).strip().lower() for cell in row]
+    if any(k in row_lower for k in ['fecha', 'date']) and any(k in row_lower for k in ['monto', 'amount', 'valor']):
+        headers_row_idx = idx
+        break
+
 df_contabilidad = pd.DataFrame(
-    data_contabilidad[2:],   # datos
-    columns=data_contabilidad[2]  # headers reales
+    data_contabilidad[headers_row_idx + 1:],   # datos
+    columns=data_contabilidad[headers_row_idx]  # headers reales
 )
 
 sheet_general = spreadsheet.worksheet("GENERAL")
