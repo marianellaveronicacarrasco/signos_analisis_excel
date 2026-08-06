@@ -16,9 +16,12 @@ creds = Credentials.from_service_account_info(
 
 client = gspread.authorize(creds)
 
-spreadsheet = client.open_by_key("1s3PvG-ob2P-KsgrdO4IyFxC8kVICHWNgiwOTiyF2BRQ")
+# Nuevo Google Sheet
+spreadsheet = client.open_by_key("1dN-kjwx-D2i78DEODVhqaJof3Earj_zKFlz3V-lwAkw")
 
-spreadsheet_conta = client.open_by_key("1owTaWpPgb3LHMhgctAgDPCxheounko_FVeFArTN4T3o")
+# Si el nuevo Excel también contiene la pestaña "INGRESOS Y GASTOS", usamos el mismo.
+# De lo contrario, puedes volver a colocar la clave anterior aquí si es un archivo separado.
+spreadsheet_conta = spreadsheet
 
 sheet_contabilidad = spreadsheet_conta.worksheet("INGRESOS Y GASTOS")
 data_contabilidad = sheet_contabilidad.get_all_values()
