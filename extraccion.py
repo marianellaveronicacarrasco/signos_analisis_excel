@@ -72,6 +72,18 @@ def limpiar_monto(col):
         .fillna(0)
     )
 
+def limpiar_monto_us(col):
+    return (
+        col.astype(str)
+        .str.replace("$", "", regex=False)
+        .str.replace(",", "", regex=False)
+        .str.strip()
+        .replace("", "0")
+        .pipe(pd.to_numeric, errors="coerce")
+        .fillna(0)
+    )
+
+
 def limpiar_texto(texto):
     return (
         unicodedata.normalize("NFKD", texto)
@@ -143,7 +155,7 @@ def limpiar_contabilidad(df):
     df["TIPO"] = df["TIPO"].str.strip().str.upper()
     df["CONCEPTO"] = df["CONCEPTO"].str.strip()
 
-    df["MONTO"] = limpiar_monto(df["MONTO"])
+    df["MONTO"] = limpiar_monto_us(df["MONTO"])
 
     return df
 # ---------------- LIMPIEZA
