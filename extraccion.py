@@ -16,8 +16,8 @@ creds = Credentials.from_service_account_info(
 
 client = gspread.authorize(creds)
 
-# Spreadsheet original para General y Papeles
-spreadsheet = client.open_by_key("1s3PvG-ob2P-KsgrdO4IyFxC8kVICHWNgiwOTiyF2BRQ")
+# Nuevo Spreadsheet para General y Papeles
+spreadsheet = client.open_by_key("1DiFug8n3MjV6PggR8d_bDHB0zZMmKKIzEmPtN5jjMZg")
 
 # Nuevo Google Sheet para contabilidad
 spreadsheet_conta = client.open_by_key("1dN-kjwx-D2i78DEODVhqaJof3Earj_zKFlz3V-lwAkw")
