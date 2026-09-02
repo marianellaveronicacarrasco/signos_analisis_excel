@@ -1,208 +1,208 @@
-﻿FECHA;CONCEPTO;TIPO;MONTO;;;;;;;;;
-2026-04-01;Ingresos por Mercado Pago;INGRESO;39257840.0;;;;;;;;;
-2026-04-01;Rendimientos;INGRESO;84914.25;;;;;;;;;
-2026-04-01;Ingresos EFECTIVO;INGRESO;29958160.0;;;;;;;;;
-2026-04-01;Ingresos SANTANDER;INGRESO;1677622.0;;;;;;;;;
-2026-04-01;Ingresos E-CHEQ;INGRESO;810330.95;;;;;;;;;
-2026-04-01;Alquiler Local;GASTO;1477311.0;;;;;;;;;
-2026-04-01;Luz;GASTO;322960.0;;;;;;;;;
-2026-04-01;Gas;GASTO;44750.0;;;;;;;;;
-;Internet;GASTO;0.0;;;;;;;;;
-2026-04-01;Movistar;GASTO;32000.0;;;;;;;;;
-2026-04-01;Servicio Limpieza;GASTO;540000.0;;;;;;;;;
-2026-04-01;Flores;GASTO;90000.0;;;;;;;;;
-2026-04-01;Autónomos;GASTO;66389.76;;;;;;;;;
-2026-04-01;Ingresos Brutos;GASTO;1019539.95;;;;;;;;;
-2026-06-01;IVA;GASTO;6213936.79;;;;;;;;;
-;Impuesto a las Ganancias;GASTO;0.0;;;;;;;;;
-2026-04-01;Sueldos blanco;GASTO;4021361.0;;;;;;;;;
-2026-04-01;Sueldos negro;GASTO;7455616.18;;;;;;;;;
-2026-04-01;Cargas sociales;GASTO;2819773.17;;;;;;;;;
-2026-04-01;Sindicato;GASTO;0.0;;;;;;;;;
-;Aguinaldos;GASTO;0.0;;;;;;;;;
-2026-04-01;Profesionales;GASTO;21906770.33;;;;;;;;;
-2026-04-01;Viandas Profesionales;GASTO;239200.0;;;;;;;;;
-2026-04-01;Gastos Limpieza;GASTO;344500.0;;;;;;;;;
-2026-04-01;Seguros Signos;GASTO;84718.0;;;;;;;;;
-;Insumos diarios;GASTO;0.0;;;;;;;;;
-2026-04-01;Laboratorio;GASTO;3920600.33;;;;;;;;;
-2026-04-01;Cardiología;GASTO;988000.0;;;;;;;;;
-2026-04-01;Neurología;GASTO;500000.0;;;;;;;;;
-2026-04-01;Psicopedagóga;GASTO;200000.0;;;;;;;;;
-;Fonoaudióloga;GASTO;0.0;;;;;;;;;
-2026-04-01;Neumonólogo;GASTO;36000.0;;;;;;;;;
-2026-04-01;RX;GASTO;120000.0;;;;;;;;;
-2026-04-01;Ergometria;GASTO;100000.0;;;;;;;;;
-2026-04-01;Boletas REPAT;GASTO;5595720.0;;;;;;;;;
-2026-04-01;Boletas RNR;GASTO;146400.0;;;;;;;;;
-2026-04-01;FALTANTE;AJUSTE;46000.0;;;;;;;;;
-2026-04-01;SOBRANTE;AJUSTE;8000.0;;;;;;;;;
-2026-04-01;Comisiones Mercado PAGO;GASTO;982850.38;;;;;;;;;
-2026-05-01;Ingresos por Mercado Pago;INGRESO;36135885.4;;;;;;;;;
-2026-05-01;Rendimientos;INGRESO;144536.1;;;;;;;;;
-2026-05-01;Ingresos EFECTIVO;INGRESO;28105400.0;;;;;;;;;
-2026-05-01;Ingresos SANTANDER;INGRESO;641279.0;;;;;;;;;
-2026-05-01;Ingresos E-CHEQ;INGRESO;1620661.9;;;;;;;;;
-2026-05-01;Alquiler Local;GASTO;1477311.0;;;;;;;;;
-2026-05-01;Luz;GASTO;341802.0;;;;;;;;;
-2026-05-01;Gas;GASTO;114017.0;;;;;;;;;
-;Internet;GASTO;0.0;;;;;;;;;
-2026-05-01;Movistar;GASTO;33341.0;;;;;;;;;
-2026-05-01;Servicio Limpieza;GASTO;540000.0;;;;;;;;;
-2026-05-01;Flores;GASTO;90000.0;;;;;;;;;
-2026-05-01;Autónomos;GASTO;68315.0;;;;;;;;;
-2026-05-01;Ingresos Brutos;GASTO;903578.78;;;;;;;;;
-;IVA;GASTO;0.0;;;;;;;;;
-;Impuesto a las Ganancias;GASTO;0.0;;;;;;;;;
-2026-05-01;Sueldos blanco;GASTO;4919077.0;;;;;;;;;
-2026-05-01;Sueldos negro;GASTO;9182215.27;;;;;;;;;
-2026-05-01;Cargas sociales;GASTO;3444014.89;;;;;;;;;
-2026-05-01;Sindicato;GASTO;53777.38;;;;;;;;;
-;Aguinaldos;GASTO;0.0;;;;;;;;;
-2026-05-01;Profesionales;GASTO;3486283.33;;;;;;;;;
-2026-05-01;Viandas Profesionales;GASTO;114400.0;;;;;;;;;
-2026-05-01;Gastos Limpieza;GASTO;0.0;;;;;;;;;
-2026-05-01;Seguros Signos;GASTO;84718.0;;;;;;;;;
-2026-05-01;Inversion;GASTO;5324500.0;;;;;;;;;
-2026-05-01;Caja chica;GASTO;308950.0;;;;;;;;;
-2026-05-01;Laboratorio;GASTO;800000.0;;;;;;;;;
-2026-05-01;Cardiología;GASTO;442000.0;;;;;;;;;
-2026-05-01;Neurología;GASTO;180000.0;;;;;;;;;
-2026-05-01;Psicopedagóga;GASTO;75000.0;;;;;;;;;
-;Fonoaudióloga;GASTO;0.0;;;;;;;;;
-2026-05-01;Neumonólogo;GASTO;0.0;;;;;;;;;
-2026-05-01;RX;GASTO;740000.0;;;;;;;;;
-2026-05-01;Ergometria;GASTO;0.0;;;;;;;;;
-2026-05-01;Boletas REPAT;GASTO;4763880.0;;;;;;;;;
-2026-05-01;Boletas RNR;GASTO;228000.0;;;;;;;;;
-;FALTANTE;AJUSTE;0.0;;;;;;;;;
-2026-05-01;SOBRANTE;AJUSTE;450.0;;;;;;;;;
-2026-05-01;Comisiones Mercado PAGO;GASTO;925518.8;;;;;;;;;
-2026-06-01;Ingresos por Mercado Pago;INGRESO;19902860.0;;;;;;;;;
-2026-06-01;Rendimientos;INGRESO;111799.48;;;;;;;;;
-2026-06-01;Ingresos EFECTIVO;INGRESO;24021000.0;;;;;;;;;
-2026-06-01;Ingresos SANTANDER;INGRESO;5615851.85;;;;;;;;;
-2026-06-01;Ingresos E-CHEQ;INGRESO;0.0;;;;;;;;;
-2026-06-01;Alquiler Local;GASTO;1477311.0;;;;;;;;;
-2026-06-01;Luz;GASTO;360961.0;;;;;;;;;
-2026-06-01;Gas;GASTO;114017.0;;;;;;;;;
-2026-06-01;Internet;GASTO;0.0;;;;;;;;;
-2026-06-01;Movistar;GASTO;34153.0;;;;;;;;;
-2026-06-01;Servicio Limpieza;GASTO;630000.0;;;;;;;;;
-2026-06-01;Flores;GASTO;95000.0;;;;;;;;;
-2026-06-01;Autónomos;GASTO;70624.12;;;;;;;;;
-2026-06-01;Ingresos Brutos;GASTO;700569.93;;;;;;;;;
-2026-06-01;IVA;GASTO;6213936.79;;;;;;;;;
-;Impuesto a las Ganancias;GASTO;0.0;;;;;;;;;
-2026-06-01;Sueldos blanco;GASTO;7038838.0;;;;;;;;;
-2026-06-01;Sueldos negro;GASTO;7844877.23;;;;;;;;;
-2026-06-01;Cargas sociales;GASTO;4428603.79;;;;;;;;;
-2026-06-01;Sindicato;GASTO;71000.76;;;;;;;;;
-2026-06-01;Aguinaldos;GASTO;6378838.0;;;;;;;;;
-2026-06-01;Profesionales;GASTO;16470600.0;;;;;;;;;
-;Comisiones Vendedor;GASTO;0.0;;;;;;;;;
-2026-06-01;Viandas Profesionales;GASTO;286000.0;;;;;;;;;
-2026-06-01;Gastos Limpieza;GASTO;0.0;;;;;;;;;
-2026-06-01;Seguros Signos;GASTO;91852.0;;;;;;;;;
-2026-06-01;Caja chica;GASTO;1541100.0;;;;;;;;;
-2026-06-01;Laboratorio;GASTO;1288200.0;;;;;;;;;
-2026-06-01;Cardiología;GASTO;299000.0;;;;;;;;;
-2026-06-01;Neurología;GASTO;160000.0;;;;;;;;;
-2026-06-01;Psicopedagóga;GASTO;30000.0;;;;;;;;;
-2026-06-01;Fonoaudióloga;GASTO;265000.0;;;;;;;;;
-2026-06-01;Neumonólogo;GASTO;0.0;;;;;;;;;
-2026-06-01;RX;GASTO;120000.0;;;;;;;;;
-2026-06-01;Ergometria;GASTO;1040000.0;;;;;;;;;
-2026-06-01;Boletas REPAT;GASTO;5430124.0;;;;;;;;;
-2026-06-01;Boletas RNR;GASTO;90100.0;;;;;;;;;
-2026-06-01;FALTANTE;AJUSTE;0.0;;;;;;;;;
-2026-06-01;SOBRANTE;AJUSTE;0.0;;;;;;;;;
-2026-06-01;Comisiones Mercado PAGO;GASTO;814845.02;;;;;;;;;
-2026-07-01;Ingresos por Mercado Pago;INGRESO;15560860.0;;;;;;;;;
-2026-07-01;Rendimientos;INGRESO;38639.63;;;;;;;;;
-2026-07-01;Ingresos EFECTIVO;INGRESO;22636900.0;;;;;;;;;
-2026-07-01;Ingresos SANTANDER;INGRESO;796710.2;;;;;;;;;
-2026-07-01;Ingresos E-CHEQ;INGRESO;0.0;;;;;;;;;
-2026-07-01;Alquiler Local;GASTO;1477311.0;;;;;;;;;
-2026-07-01;Luz;GASTO;385720.0;;;;;;;;;
-2026-07-01;Gas;GASTO;267865.86;;;;;;;;;
-2026-07-01;Internet;GASTO;136500.0;;;;;;;;;
-2026-07-01;Movistar;GASTO;82687.18;;;;;;;;;
-2026-07-01;Servicio Limpieza;GASTO;702000.0;;;;;;;;;
-2026-07-01;Autónomos;GASTO;72447.0;;;;;;;;;
-2026-07-01;Ingresos Brutos;GASTO;1030659.0;;;;;;;;;
-2026-07-01;IVA;GASTO;4179902.46;;;;;;;;;
-;Impuesto a las Ganancias;GASTO;0.0;;;;;;;;;
-2026-07-01;Sueldos blanco;GASTO;10755659.0;;;;;;;;;
-2026-07-01;Sueldos negro;GASTO;4304900.97;;;;;;;;;
-2026-07-01;Cargas sociales;GASTO;8131142.0;;;;;;;;;
-2026-07-01;Sindicato;GASTO;187717.0;;;;;;;;;
-;Aguinaldos;GASTO;0.0;;;;;;;;;
-2026-07-01;Profesionales;GASTO;11356460.0;;;;;;;;;
-2026-07-01;Viandas Profesionales;GASTO;78000.0;;;;;;;;;
-2026-07-01;Gastos Limpieza;GASTO;0.0;;;;;;;;;
-2026-07-01;Seguros Signos;GASTO;91823.0;;;;;;;;;
-;Gastos TC;GASTO;0.0;;;;;;;;;
-2026-07-01;Gastos Varios;GASTO;0.0;;;;;;;;;
-2026-07-01;Gastos Libreria;GASTO;0.0;;;;;;;;;
-2026-07-01;Caja chica;GASTO;0.0;;;;;;;;;
-2026-07-01;Laboratorio;GASTO;2123800.0;;;;;;;;;
-2026-07-01;Cardiología;GASTO;598000.0;;;;;;;;;
-2026-07-01;Neurología;GASTO;300000.0;;;;;;;;;
-2026-07-01;Psicopedagóga;GASTO;0.0;;;;;;;;;
-2026-07-01;Fonoaudióloga;GASTO;130000.0;;;;;;;;;
-2026-07-01;Neumonólogo;GASTO;0.0;;;;;;;;;
-2026-07-01;RX;GASTO;880000.0;;12124000;;;;;;;
-2026-07-01;Ergometria;GASTO;0.0;;3800000;;;;;;;
-2026-07-01;Boletas REPAT;GASTO;3807190.0;;5600000;;;;;;;
-2026-07-01;Boletas RNR;GASTO;66004.0;;;;;;;;;
-2026-07-01;FALTANTE;AJUSTE;0.0;;;;;;;;;
-2026-07-01;SOBRANTE;AJUSTE;0.0;;;;;;;;;
-2026-07-01;Comisiones Mercado PAGO;GASTO;569939.6;;;;;;29400160;;;
-2026-08-01;Ingresos por Mercado Pago;INGRESO;13255780.0;;;;;;;;;
-2026-08-01;Rendimientos;INGRESO;0.0;;1774400;;2280600;10975180;;;;30890,49
-2026-08-01;Ingresos EFECTIVO;INGRESO;27355800.0;;1247000;;;;;;;
-2026-08-01;Ingresos GALICIA;INGRESO;8034991.88;;538950;;170709,43;477499,77;;;;
-2026-08-01;Ingresos E-CHEQ;INGRESO;0.0;;865400;;;;;;;
-2026-08-01;Alquiler Local;GASTO;1863191.0;;1365100;;;;;;;
-2026-08-01;Luz;GASTO;0.0;;800030;;;;;;;
-2026-08-01;Gas;GASTO;0.0;;816000;;;;;;;
-2026-08-01;Internet;GASTO;248200.0;;2803500;;;;;;;
-2026-08-01;Movistar;GASTO;0.0;;1370630;;;;;;;
-2026-08-01;Servicio Limpieza;GASTO;0.0;;1647000;;;;;;;
-2026-08-01;Autónomos;GASTO;0.0;;2121200;;;;;;;
-2026-08-01;Ingresos Brutos;GASTO;0.0;;1569730;;;;;;;
-2026-08-01;IVA;GASTO;0.0;;1054380;;;;;;;
-2026-08-01;Impuesto a las Ganancias;GASTO;0.0;;2567200;;;;;;;
-2026-08-01;Sueldos blanco;GASTO;0.0;;1280600;;;;;;;
-2026-08-01;Sueldos negro;GASTO;0.0;;1923400;;;;;;;
-2026-08-01;Cargas sociales;GASTO;0.0;;1639080;;;;;;;
-2026-08-01;Sindicato;GASTO;0.0;;1444580;;;;;;;
-2026-08-01;Aguinaldos;GASTO;0.0;;2571980;;;;;;;
-2026-08-01;Profesionales;GASTO;0.0;;;;;;;;;
-2026-08-01;Viandas Profesionales;GASTO;0.0;;;;;;;;;
-2026-08-01;Gastos Limpieza;GASTO;0.0;;;;;;;;;
-2026-08-01;Seguros Signos;GASTO;0.0;;;;;;;;;
-2026-08-01;Gastos TC;GASTO;0.0;;;;;;;;;
-2026-08-01;Retiro Juan;GASTO;6000000.0;;;;;;;;;
-2026-08-01;Pago a Maga;GASTO;10203000.0;;;;;;;;;
-2026-08-01;Inversion;GASTO;5406754.0;;;;;;;;;
-2026-08-01;Gastos Varios;GASTO;487623.0;;;;;;;;;
-2026-08-01;Gastos Libreria;GASTO;16910.0;;;;;;;;;
-2026-08-01;Caja chica;GASTO;40000.0;;;;;;;;;
-2026-08-01;Laboratorio;GASTO;0.0;;;;;;;;;
-2026-08-01;Cardiología;GASTO;0.0;;;;;;;;;
-2026-08-01;Neurología;GASTO;0.0;;;;;;;;;
-2026-08-01;Psicopedagóga;GASTO;0.0;;;;;;;;;
-2026-08-01;Oftalmologia;GASTO;60000.0;;;;;;;;;
-2026-08-01;Odontologia;GASTO;0.0;;;;;;;;;
-2026-08-01;Fonoaudióloga;GASTO;0.0;;;;;;;;;
-2026-08-01;Neumonólogo;GASTO;0.0;;;;;;;;;
-2026-08-01;RX;GASTO;0.0;;;;;;;;;
-2026-08-01;Ergometria;GASTO;0.0;;;;;;;;;
-2026-08-01;Boletas REPAT;GASTO;0.0;;;;;;;;;
-2026-08-01;Boletas RNR;GASTO;0.0;;;;;;;;;
-2026-08-01;FALTANTE;AJUSTE;0.0;;;;;;;;;
-2026-08-01;SOBRANTE;AJUSTE;0.0;;;;;;;;;
-2026-08-01;Comisiones Mercado PAGO;GASTO;648209.2;;;;;;;;;
-2026-08-01;Comisiones Galicia;GASTO;50087.93;;;;;;;;;
+﻿FECHA;CONCEPTO;TIPO;MONTO
+2026-04-01;Ingresos por Mercado Pago;INGRESO;39257840.0
+2026-04-01;Rendimientos;INGRESO;84914.25
+2026-04-01;Ingresos EFECTIVO;INGRESO;29958160.0
+2026-04-01;Ingresos SANTANDER;INGRESO;1677622.0
+2026-04-01;Ingresos E-CHEQ;INGRESO;810330.95
+2026-04-01;Alquiler Local;GASTO;1477311.0
+2026-04-01;Luz;GASTO;322960.0
+2026-04-01;Gas;GASTO;44750.0
+;Internet;GASTO;0.0
+2026-04-01;Movistar;GASTO;32000.0
+2026-04-01;Servicio Limpieza;GASTO;540000.0
+2026-04-01;Flores;GASTO;90000.0
+2026-04-01;Autónomos;GASTO;66389.76
+2026-04-01;Ingresos Brutos;GASTO;1019539.95
+2026-06-01;IVA;GASTO;6213936.79
+;Impuesto a las Ganancias;GASTO;0.0
+2026-04-01;Sueldos blanco;GASTO;4021361.0
+2026-04-01;Sueldos negro;GASTO;7455616.18
+2026-04-01;Cargas sociales;GASTO;2819773.17
+2026-04-01;Sindicato;GASTO;0.0
+;Aguinaldos;GASTO;0.0
+2026-04-01;Profesionales;GASTO;21906770.33
+2026-04-01;Viandas Profesionales;GASTO;239200.0
+2026-04-01;Gastos Limpieza;GASTO;344500.0
+2026-04-01;Seguros Signos;GASTO;84718.0
+;Insumos diarios;GASTO;0.0
+2026-04-01;Laboratorio;GASTO;3920600.33
+2026-04-01;Cardiología;GASTO;988000.0
+2026-04-01;Neurología;GASTO;500000.0
+2026-04-01;Psicopedagóga;GASTO;200000.0
+;Fonoaudióloga;GASTO;0.0
+2026-04-01;Neumonólogo;GASTO;36000.0
+2026-04-01;RX;GASTO;120000.0
+2026-04-01;Ergometria;GASTO;100000.0
+2026-04-01;Boletas REPAT;GASTO;5595720.0
+2026-04-01;Boletas RNR;GASTO;146400.0
+2026-04-01;FALTANTE;AJUSTE;46000.0
+2026-04-01;SOBRANTE;AJUSTE;8000.0
+2026-04-01;Comisiones Mercado PAGO;GASTO;982850.38
+2026-05-01;Ingresos por Mercado Pago;INGRESO;36135885.4
+2026-05-01;Rendimientos;INGRESO;144536.1
+2026-05-01;Ingresos EFECTIVO;INGRESO;28105400.0
+2026-05-01;Ingresos SANTANDER;INGRESO;641279.0
+2026-05-01;Ingresos E-CHEQ;INGRESO;1620661.9
+2026-05-01;Alquiler Local;GASTO;1477311.0
+2026-05-01;Luz;GASTO;341802.0
+2026-05-01;Gas;GASTO;114017.0
+;Internet;GASTO;0.0
+2026-05-01;Movistar;GASTO;33341.0
+2026-05-01;Servicio Limpieza;GASTO;540000.0
+2026-05-01;Flores;GASTO;90000.0
+2026-05-01;Autónomos;GASTO;68315.0
+2026-05-01;Ingresos Brutos;GASTO;903578.78
+;IVA;GASTO;0.0
+;Impuesto a las Ganancias;GASTO;0.0
+2026-05-01;Sueldos blanco;GASTO;4919077.0
+2026-05-01;Sueldos negro;GASTO;9182215.27
+2026-05-01;Cargas sociales;GASTO;3444014.89
+2026-05-01;Sindicato;GASTO;53777.38
+;Aguinaldos;GASTO;0.0
+2026-05-01;Profesionales;GASTO;3486283.33
+2026-05-01;Viandas Profesionales;GASTO;114400.0
+2026-05-01;Gastos Limpieza;GASTO;0.0
+2026-05-01;Seguros Signos;GASTO;84718.0
+2026-05-01;Inversion;GASTO;5324500.0
+2026-05-01;Caja chica;GASTO;308950.0
+2026-05-01;Laboratorio;GASTO;800000.0
+2026-05-01;Cardiología;GASTO;442000.0
+2026-05-01;Neurología;GASTO;180000.0
+2026-05-01;Psicopedagóga;GASTO;75000.0
+;Fonoaudióloga;GASTO;0.0
+2026-05-01;Neumonólogo;GASTO;0.0
+2026-05-01;RX;GASTO;740000.0
+2026-05-01;Ergometria;GASTO;0.0
+2026-05-01;Boletas REPAT;GASTO;4763880.0
+2026-05-01;Boletas RNR;GASTO;228000.0
+;FALTANTE;AJUSTE;0.0
+2026-05-01;SOBRANTE;AJUSTE;450.0
+2026-05-01;Comisiones Mercado PAGO;GASTO;925518.8
+2026-06-01;Ingresos por Mercado Pago;INGRESO;19902860.0
+2026-06-01;Rendimientos;INGRESO;111799.48
+2026-06-01;Ingresos EFECTIVO;INGRESO;24021000.0
+2026-06-01;Ingresos SANTANDER;INGRESO;5615851.85
+2026-06-01;Ingresos E-CHEQ;INGRESO;0.0
+2026-06-01;Alquiler Local;GASTO;1477311.0
+2026-06-01;Luz;GASTO;360961.0
+2026-06-01;Gas;GASTO;114017.0
+2026-06-01;Internet;GASTO;0.0
+2026-06-01;Movistar;GASTO;34153.0
+2026-06-01;Servicio Limpieza;GASTO;630000.0
+2026-06-01;Flores;GASTO;95000.0
+2026-06-01;Autónomos;GASTO;70624.12
+2026-06-01;Ingresos Brutos;GASTO;700569.93
+2026-06-01;IVA;GASTO;6213936.79
+;Impuesto a las Ganancias;GASTO;0.0
+2026-06-01;Sueldos blanco;GASTO;7038838.0
+2026-06-01;Sueldos negro;GASTO;7844877.23
+2026-06-01;Cargas sociales;GASTO;4428603.79
+2026-06-01;Sindicato;GASTO;71000.76
+2026-06-01;Aguinaldos;GASTO;6378838.0
+2026-06-01;Profesionales;GASTO;16470600.0
+;Comisiones Vendedor;GASTO;0.0
+2026-06-01;Viandas Profesionales;GASTO;286000.0
+2026-06-01;Gastos Limpieza;GASTO;0.0
+2026-06-01;Seguros Signos;GASTO;91852.0
+2026-06-01;Caja chica;GASTO;1541100.0
+2026-06-01;Laboratorio;GASTO;1288200.0
+2026-06-01;Cardiología;GASTO;299000.0
+2026-06-01;Neurología;GASTO;160000.0
+2026-06-01;Psicopedagóga;GASTO;30000.0
+2026-06-01;Fonoaudióloga;GASTO;265000.0
+2026-06-01;Neumonólogo;GASTO;0.0
+2026-06-01;RX;GASTO;120000.0
+2026-06-01;Ergometria;GASTO;1040000.0
+2026-06-01;Boletas REPAT;GASTO;5430124.0
+2026-06-01;Boletas RNR;GASTO;90100.0
+2026-06-01;FALTANTE;AJUSTE;0.0
+2026-06-01;SOBRANTE;AJUSTE;0.0
+2026-06-01;Comisiones Mercado PAGO;GASTO;814845.02
+2026-07-01;Ingresos por Mercado Pago;INGRESO;15560860.0
+2026-07-01;Rendimientos;INGRESO;38639.63
+2026-07-01;Ingresos EFECTIVO;INGRESO;22636900.0
+2026-07-01;Ingresos SANTANDER;INGRESO;796710.2
+2026-07-01;Ingresos E-CHEQ;INGRESO;0.0
+2026-07-01;Alquiler Local;GASTO;1477311.0
+2026-07-01;Luz;GASTO;385720.0
+2026-07-01;Gas;GASTO;267865.86
+2026-07-01;Internet;GASTO;136500.0
+2026-07-01;Movistar;GASTO;82687.18
+2026-07-01;Servicio Limpieza;GASTO;702000.0
+2026-07-01;Autónomos;GASTO;72447.0
+2026-07-01;Ingresos Brutos;GASTO;1030659.0
+2026-07-01;IVA;GASTO;4179902.46
+;Impuesto a las Ganancias;GASTO;0.0
+2026-07-01;Sueldos blanco;GASTO;10755659.0
+2026-07-01;Sueldos negro;GASTO;4304900.97
+2026-07-01;Cargas sociales;GASTO;8131142.0
+2026-07-01;Sindicato;GASTO;187717.0
+;Aguinaldos;GASTO;0.0
+2026-07-01;Profesionales;GASTO;11356460.0
+2026-07-01;Viandas Profesionales;GASTO;78000.0
+2026-07-01;Gastos Limpieza;GASTO;0.0
+2026-07-01;Seguros Signos;GASTO;91823.0
+;Gastos TC;GASTO;0.0
+2026-07-01;Gastos Varios;GASTO;0.0
+2026-07-01;Gastos Libreria;GASTO;0.0
+2026-07-01;Caja chica;GASTO;0.0
+2026-07-01;Laboratorio;GASTO;2123800.0
+2026-07-01;Cardiología;GASTO;598000.0
+2026-07-01;Neurología;GASTO;300000.0
+2026-07-01;Psicopedagóga;GASTO;0.0
+2026-07-01;Fonoaudióloga;GASTO;130000.0
+2026-07-01;Neumonólogo;GASTO;0.0
+2026-07-01;RX;GASTO;880000.0
+2026-07-01;Ergometria;GASTO;0.0
+2026-07-01;Boletas REPAT;GASTO;3807190.0
+2026-07-01;Boletas RNR;GASTO;66004.0
+2026-07-01;FALTANTE;AJUSTE;0.0
+2026-07-01;SOBRANTE;AJUSTE;0.0
+2026-07-01;Comisiones Mercado PAGO;GASTO;569939.6
+2026-08-01;Ingresos por Mercado Pago;INGRESO;13255780.0
+2026-08-01;Rendimientos;INGRESO;0.0
+2026-08-01;Ingresos EFECTIVO;INGRESO;27355800.0
+2026-08-01;Ingresos GALICIA;INGRESO;8034991.88
+2026-08-01;Ingresos E-CHEQ;INGRESO;0.0
+2026-08-01;Alquiler Local;GASTO;1863191.0
+2026-08-01;Luz;GASTO;0.0
+2026-08-01;Gas;GASTO;0.0
+2026-08-01;Internet;GASTO;248200.0
+2026-08-01;Movistar;GASTO;0.0
+2026-08-01;Servicio Limpieza;GASTO;0.0
+2026-08-01;Autónomos;GASTO;0.0
+2026-08-01;Ingresos Brutos;GASTO;0.0
+2026-08-01;IVA;GASTO;0.0
+2026-08-01;Impuesto a las Ganancias;GASTO;0.0
+2026-08-01;Sueldos blanco;GASTO;0.0
+2026-08-01;Sueldos negro;GASTO;0.0
+2026-08-01;Cargas sociales;GASTO;0.0
+2026-08-01;Sindicato;GASTO;0.0
+2026-08-01;Aguinaldos;GASTO;0.0
+2026-08-01;Profesionales;GASTO;0.0
+2026-08-01;Viandas Profesionales;GASTO;0.0
+2026-08-01;Gastos Limpieza;GASTO;0.0
+2026-08-01;Seguros Signos;GASTO;0.0
+2026-08-01;Gastos TC;GASTO;0.0
+2026-08-01;Retiro Juan;GASTO;6000000.0
+2026-08-01;Pago a Maga;GASTO;10203000.0
+2026-08-01;Inversion;GASTO;5406754.0
+2026-08-01;Gastos Varios;GASTO;487623.0
+2026-08-01;Gastos Libreria;GASTO;16910.0
+2026-08-01;Caja chica;GASTO;40000.0
+2026-08-01;Laboratorio;GASTO;0.0
+2026-08-01;Cardiología;GASTO;0.0
+2026-08-01;Neurología;GASTO;0.0
+2026-08-01;Psicopedagóga;GASTO;0.0
+2026-08-01;Oftalmologia;GASTO;60000.0
+2026-08-01;Odontologia;GASTO;0.0
+2026-08-01;Fonoaudióloga;GASTO;0.0
+2026-08-01;Neumonólogo;GASTO;0.0
+2026-08-01;RX;GASTO;0.0
+2026-08-01;Ergometria;GASTO;0.0
+2026-08-01;Boletas REPAT;GASTO;0.0
+2026-08-01;Boletas RNR;GASTO;0.0
+2026-08-01;FALTANTE;AJUSTE;0.0
+2026-08-01;SOBRANTE;AJUSTE;0.0
+2026-08-01;Comisiones Mercado PAGO;GASTO;648209.2
+2026-08-01;Comisiones Galicia;GASTO;50087.93
